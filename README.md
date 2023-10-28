@@ -1,4 +1,4 @@
-# Proyecto de Reseñas de películas
+# Proyecto
 ### Curso:Ambiente Web Cliente/Servidor SC-502
 Profesor: Christian Solano Perez <hr>
 Miembros:
