@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,500;1,500&display=swap');
+ 
  :root {
     --blue: #007bff;
     --indigo: #6610f2;
@@ -25,18 +27,17 @@
     --breakpoint-md: 768px;
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
-    --font-family-sans-serif: "Roboto", sans-serif;
-    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --font-family: "Montserrat", "Roboto", sans-serif;
   }
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: var(--font-family);
 }
 
-
-header {
+.header-container {
     padding: 1.5em 2.5em;
     box-shadow: 5px 5px 15px 5px #0002;
     display: flex;
@@ -61,14 +62,18 @@ ul {
 a {
     text-decoration: none;
     color: #000;
+    font-weight: bold;
+}
+
+
+ul li {
+    font-weight: bold;
+    font-size: 1rem;
 }
 
 ul li:first-child {
     margin-right: auto;
-}
-
-ul li {
-    font-weight: bold;
+    font-size: 1.2rem;
 }
 
 nav > a span {
@@ -76,6 +81,101 @@ nav > a span {
 }
   
 
-@media (min-width: 800px) {
+.hamburger-menu {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    left: 5%;
+    top: 20px;
+    margin-bottom: 4rem;
+    border: none;
+    outline: none;
+    padding: .3em .6em;
+    font-size: 1.8rem;
+    background-color: #fff;
+    box-shadow: 5px 2px 40px 2px #0003;
+    cursor: pointer;
+    border-radius: 10px;
+}
 
+.hamburger-menu i {
+    transition: all 0.3s ease-in-out;
+    z-index: 100000;
+}
+
+
+
+
+
+footer {
+    width: 100%;
+    color: var(--light);
+    text-align: center;
+    background-color: var(--dark);
+    padding: 1rem;
+    z-index: 1;
+}
+
+@media (max-width: 800px) {
+    .hamburger-menu.close + .header {
+        transform: translateX(-100%);
+        transition: transform .7s ease-in-out;
+    }
+    
+    .hamburger-menu.close + .header .header-container .header-navbar {
+        transform: translateX(-100%);
+    } 
+
+    /* .hamburger-menu.close + .header .header-container {
+        width: 0;
+        height: 0;
+        transition: transform .7s ease-in-out;
+    }     */
+    
+    .header {
+        width: 20%;
+        min-width: 270px;
+        min-height: 100vh;
+        position: fixed;
+        z-index: 100;
+        transform: translateX(0);
+        transition: transform .7s ease-in-out;
+    }
+    
+    .header-container {
+        width: 20%;
+        background-color: #fff;
+        min-width: 250px;
+        min-height: 100vh;
+        justify-content: flex-start;
+        flex-direction: column;
+        padding: 1em 2em;
+    }
+    
+    .header-navbar {
+        flex-direction: column; 
+        justify-content: flex-start;
+        width: 100%;
+        min-height: 100vh;
+        transition: transform .7s ease-in-out;
+    }
+
+    .hamburger-menu {
+        display: inline;        
+    }
+    
+    .header-navbar-list {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    ul li:first-child {
+        margin-bottom: 2.5rem;
+        margin-top: 6rem;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+
+     
 }

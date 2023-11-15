@@ -2,16 +2,31 @@
     include_once("Views/layout.php");
 ?>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="styles/main.css" rel="stylesheet">
-    <title>Proyecto</title>
-</head>
-<body>
-    <?php
-        MostrarHeader();
-    ?>
-</body>
-</html>
+    <html lang="en">
+        <?php
+            MostrarHead("Inicio");
+        ?>
+        <body>
+            <?php
+                MostrarHeader();
+            ?>
+            
+            
+            <?php
+                Footer();
+                ?>
+        </body>
+
+        <script>
+            const burger = document.querySelector(".hamburger-menu");
+            burger.addEventListener("click", () => {
+                if (burger.classList.contains("close")) {
+                    burger.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                } else {
+                    burger.innerHTML = '<i class="fa-solid fa-bars"></i>'
+                }
+                
+                burger.classList.toggle("close");
+            })
+        </script>
+    </html>
