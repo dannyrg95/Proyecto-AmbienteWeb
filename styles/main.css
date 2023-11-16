@@ -1,32 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,500;1,500&display=swap');
  
  :root {
-    --blue: #007bff;
-    --indigo: #6610f2;
-    --purple: #6f42c1;
-    --pink: #e83e8c;
-    --red: #dc3545;
-    --orange: #fd7e14;
-    --yellow: #ffc107;
-    --green: #28a745;
-    --teal: #20c997;
-    --cyan: #17a2b8;
-    --white: #fff;
-    --gray: #6c757d;
-    --gray-dark: #343a40;
-    --primary: #FFD333;
-    --secondary: #F5F5F5;
+    --blue: #3454D1;
+    --wine: #69353F;
+    --green: #758173;
+    --bittersweets: #F87060;
     --success: #28a745;
     --info: #17a2b8;
     --warning: #ffc107;
     --danger: #dc3545;
-    --light: #FFFFFF;
-    --dark: #3D464D;
-    --breakpoint-xs: 0;
-    --breakpoint-sm: 576px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 992px;
-    --breakpoint-xl: 1200px;
+   
     --font-family: "Montserrat", "Roboto", sans-serif;
   }
 
@@ -35,27 +18,6 @@
     margin: 0;
     box-sizing: border-box;
     font-family: var(--font-family);
-}
-
-.header-container {
-    padding: 1.5em 2.5em;
-    box-shadow: 5px 5px 15px 5px #0002;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-ul, nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5%;
-    width: 100%;
-}
-
-ul {
-    width: 100%;
-    list-style: none;
 }
 
 
@@ -69,6 +31,47 @@ a {
 ul li {
     font-weight: bold;
     font-size: 1rem;
+    position: relative;
+}
+
+ul li:not(:first-child):after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1.5px;
+    background-color: var(--wine);
+    bottom: -3px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform .5s ease-in-out;
+}
+
+ul li:hover:not(:first-child):after {
+    transform: scaleX(100%);
+}
+
+
+/* Estilos del header */
+.header-container {
+    padding: 1.5em 2.5em;
+    box-shadow: 5px 5px 20px 3px #0001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-navbar, .header-navbar-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+    width: 100%;
+}
+
+.header-navbar-list {
+    width: 100%;
+    list-style: none;
 }
 
 ul li:first-child {
@@ -79,8 +82,10 @@ ul li:first-child {
 nav > a span {
     font-size: 1.5rem; 
 }
-  
+/* ----------------- */
 
+
+/* Menú de barras para vista móvil */
 .hamburger-menu {
     display: none;
     position: fixed;
@@ -102,20 +107,87 @@ nav > a span {
     transition: all 0.3s ease-in-out;
     z-index: 100000;
 }
+/* ------------------ */
 
 
 
 
 
+/* Footer */
 footer {
     width: 100%;
-    color: var(--light);
+    color: #fff;
     text-align: center;
-    background-color: var(--dark);
+    background-color: #2a3132;
     padding: 1rem;
-    z-index: 1;
+}
+/* ------------ */
+
+
+
+
+/* Empleados */
+.form-empleados {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 10rem;
+    margin-bottom: 35.7rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    gap: 2em;
+    padding: 4em;
+    box-shadow: 0 5px 15px  #0002;
+    border-radius: 20px;
+    position: relative;
 }
 
+
+
+input {
+    border: none;
+    background: #eee;
+    border-radius: 20px;
+    padding: 1em 1.2em;
+    width: 40%;
+    outline: none;
+}
+
+.form-empleados h2 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.form-empleados button {
+    border: none;
+    outline: none;
+    background: var(--blue);
+    color: #fff;
+    padding: .5em 3em;
+    font-weight: bold;
+    margin-top: 6rem;
+    font-size: 1.7rem;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: transform .4s ease-in;
+    box-shadow: 3px 8px #000;
+}
+
+.form-empleados button:hover {
+    transform: translateY(-10%) scale(1.01);
+}
+
+
+
+
+
+
+
+
+
+/* Vista adaptada para teléfonos */
 @media (max-width: 800px) {
     .hamburger-menu.close + .header {
         transform: translateX(-100%);
@@ -126,12 +198,7 @@ footer {
         transform: translateX(-100%);
     } 
 
-    /* .hamburger-menu.close + .header .header-container {
-        width: 0;
-        height: 0;
-        transition: transform .7s ease-in-out;
-    }     */
-    
+
     .header {
         width: 20%;
         min-width: 270px;

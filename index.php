@@ -3,18 +3,12 @@
 ?>
 <!DOCTYPE html>
     <html lang="en">
-        <?php
-            MostrarHead("Inicio");
-        ?>
+        <?php MostrarHead("Inicio")?>
         <body>
-            <?php
-                MostrarHeader();
-            ?>
+            <?php MostrarHeader()?>
             
             
-            <?php
-                Footer();
-                ?>
+            <?php MostrarFooter()?>
         </body>
 
         <script>
