@@ -1,5 +1,6 @@
 <?php
-    include_once("Views/layout.php");
+    include_once("global.php");
+    include_once(VIEWS_PATH . "/layout.php");
 ?>
 <!DOCTYPE html>
     <html lang="en">

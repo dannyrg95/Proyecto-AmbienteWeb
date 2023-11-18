@@ -1,4 +1,5 @@
 <?php 
+
     function MostrarHeader() {
         echo
         '    <!-- Navbar Start -->
@@ -12,7 +13,7 @@
                 <ul class="header-navbar-list">
                         
                         <li>
-                            <a href="" class="">Project Management</a>
+                            <a href="' .  ROOT . "/"  . '" class="">Project Management</a>
                         </li>
                         <li>
                             <a href="#" class="">Inicio</a>
@@ -24,10 +25,17 @@
                             <a href="#" class="">Proyectos</a>  
                         </li>
                         <li>
-                            <a href="#" class="">Empleados</a>  
+                            <a href="'. ROOT . '/Views/empleados' . '" class="">Empleados</a>  
                         </li>
-                        
-                        
+                    </ul>
+
+                    <ul class="sign-in-up">
+                        <li>
+                            <a href="">Iniciar Sesión</a>
+                        </li>
+                        <li>
+                            <a href="">Registrarse</a>
+                        </li>
                     </ul>
                 </nav>
             </div>

@@ -19,30 +19,50 @@
         }
     
         public function Actualizar($id, $nombre, $correo, $apellidos) {
-            $sql = "UPDATE Empleados SET";
+            $sql = "UPDATE Empleados SET ";
+            $params = array();
+            $paramTypes = "";
+            
             if ($nombre !== null) {
-                $sql .= "nombre=?";
+                array_push($params, "nombre=?");
+                $paramTypes .= "s";
             }
-
+            
             if ($correo !== null) {
-                $sql .= ", correo=?";
+                array_push($params, "correo=?");
+                $paramTypes .= "s";
             }
-
+            
             if ($apellidos !== null) {
-                $sql .= ", apellidos=?";
+                array_push($params, "apellidos=?");
+                $paramTypes .= "s";
             }
-
-            $sql .= "WHERE id = ?";
-
-            $paramValues = array_filter([$nombre, $correo, $apellidos], function ($value) {
+        
+            $sql .= join(", ", $params);
+            $sql .= " WHERE id_empleado = ?";
+            $paramTypes .= "i"; 
+        
+            $paramValues = array_filter([$nombre, $correo, $apellidos, $id], function ($value) {
                 return $value !== null;
             });
-
+        
             $database = OpenDataBase();
-            array_unshift($paramValues, str_repeat('s', count($paramValues)));
-
-            call_user_func_array([$stmt, 'bind_param'], $paramValues);
+            $stmt = $database->prepare($sql);
+            if (!$stmt) {
+                die('Error en la preparación de la consulta: ' . $database->error);
+            }
+        
+    
+            array_unshift($paramValues, $paramTypes);            
+            $stmt->bind_param(...$paramValues);    
             $stmt->execute();
+
+            if ($stmt->error) {
+                die('Error en la ejecución de la consulta: ' . $stmt->error);
+            }
+        
+            
+            $stmt->close();
             closeDataBase($database);
         }
     
@@ -50,6 +70,7 @@
             $database = OpenDataBase();
             $result = $database->query("SELECT * FROM Empleados");
             $empleados = $result->fetch_all(MYSQLI_ASSOC);
+            closeDataBase($database);
             return $empleados;
         }
     

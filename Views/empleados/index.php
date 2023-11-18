@@ -1,23 +1,23 @@
 <?php
     include("../../global.php");
-    include(VIEWS_PATH . "/layout.php")
+    include(VIEWS_PATH . "/layout.php");
+    include(CONTORLLERS_PATH . "/empleadosController.php");
  ?>
 <!DOCTYPE html>
 <html>
     <?php MostrarHead("Empleados")?>
     <body>
         <?php MostrarHeader()?>
-        <div class="empleados-container">
-
-        
+        <div class="opciones-empleado">
+            <a href="<?php  echo ROOT . "/Views/empleados/agregarEmpleados.php"?>">
+                <i class="fa-solid fa-plus"></i>
+                Agregar
+            </a>   
         </div>
-        <!-- <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Correo Electrónico</th>
-            </tr>
-        </table> -->
+
+        <div class="empleados-container">
+            <?php  ObtenerTodos()?>
+        </div>
         
        
         
