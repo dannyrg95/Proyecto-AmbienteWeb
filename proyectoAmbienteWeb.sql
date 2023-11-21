@@ -11,6 +11,15 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
 
+CREATE TABLE Usuarios (
+	id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    usuario VARCHAR(30),
+    password VARCHAR(30),
+    activo BOOLEAN
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
 
 CREATE TABLE Empleados (
 	id_empleado INT PRIMARY KEY AUTO_INCREMENT,
@@ -28,8 +37,8 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE Roles (
 	id_rol INT PRIMARY KEY AUTO_INCREMENT,
     descripcion VARCHAR(30),
-    id_empleado INT,
-    FOREIGN KEY (id_empleado) REFERENCES Empleados(id_empleado)
+    id_usuario INT,
+    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -48,14 +57,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 
-CREATE TABLE Usuarios (
-	id_usuario INT PRIMARY KEY AUTO_INCREMENT,
-    usuario VARCHAR(30),
-    password VARCHAR(30),
-    activo BOOLEAN
-)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
+
 
 CREATE TABLE Proyectos_Empleados(
 	id_pe INT PRIMARY KEY AUTO_INCREMENT,
