@@ -1,6 +1,6 @@
 CREATE DATABASE proyecto_ambiente;
 
-USE proeycto_ambiente;
+USE proyecto_ambiente;
 CREATE TABLE Proyectos (
 	id_proyecto INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(30),
