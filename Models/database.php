@@ -1,5 +1,5 @@
 <?php
-    function OpenDataBase() {
+    function  OpenDataBase(){
         return mysqli_connect("localhost:3306", "proyecto_ambiente", "123456", "proyecto_ambiente");
     }
 
