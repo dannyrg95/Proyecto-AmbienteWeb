@@ -1,7 +1,8 @@
 <?php
 
 include_once('database.php');
-include_once("../global"); include_once(MODELS_PATH . "/proyectoModel.php");
+include_once("../../global.php"); 
+include_once(MODELS_PATH . "/proyectoModel.php");
 
 class ProyectoModel {
     
