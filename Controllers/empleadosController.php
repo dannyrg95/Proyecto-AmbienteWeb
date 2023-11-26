@@ -23,8 +23,6 @@
         header("Location: " . ROOT . "/Views/empleados");
     }
 
-
-
     function Actualizar() {
         global $empleadoModel;
 
