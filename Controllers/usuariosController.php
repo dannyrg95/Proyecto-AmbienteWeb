@@ -1,6 +1,7 @@
 <?php
 include_once(MODELS_PATH . "/usuariosModel.php");
 include_once(MODELS_PATH . "/rolesModel.php");
+session_start();
 
 $usuarioModel = new UsuariosModel();
 
@@ -34,7 +35,7 @@ if (isset($_POST['login'])) {
 
     $identity = new Identity($username, $password);
 
-    if ($identity->validate($rol)) {
+    if ($identity->validate()) {
         authorizeUser($username, $rol);
     } else {
         echo "Error al registrar el usuario.";

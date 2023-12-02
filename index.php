@@ -1,6 +1,7 @@
 <?php
     include_once("global.php");
     include_once(VIEWS_PATH . "/layout.php");
+    session_start();
 ?>
 <!DOCTYPE html>
     <html lang="en">

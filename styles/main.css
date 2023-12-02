@@ -34,7 +34,7 @@ ul li {
     position: relative;
 }
 
-.header-navbar-list li:not(:first-child):after, .sign-in-up li::after {
+.header-navbar-list li:not(:first-child)::after, .sign-in-up li::after {
     content: "";
     position: absolute;
     width: 100%;
@@ -129,6 +129,10 @@ footer {
     justify-content: center;
     gap: 7px;
     cursor: pointer;
+}
+
+.logout-header::after {
+   content: none !important;
 }
 
 .logout-header i, .logout-header {

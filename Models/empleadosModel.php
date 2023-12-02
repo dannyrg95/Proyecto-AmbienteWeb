@@ -1,6 +1,6 @@
 <?php
     include_once("database.php");
-
+    session_start();
     class EmpleadoModel {
         public function Agregar($nombre, $correo, $apellidos) {
             $database = OpenDataBase();

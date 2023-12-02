@@ -15,7 +15,7 @@
     class UsuariosModel{
         public function ObtenerTodos() {
             $database = OpenDataBase();
-            $result = $database->query("SELECT * FROM Usuarios u");
+            $result = $database->query("SELECT * FROM Usuarios");
             $usuarios = $result->fetch_all(MYSQLI_ASSOC);
             closeDataBase($database);
             return $usuarios;
@@ -56,7 +56,7 @@
             }
             
             if ($password !== null) {
-                array_push($paramsUsuarios, "pass=?");
+                array_push($paramsUsuarios, "password=?");
                 $paramTypesUsuarios .= "s";
             }
             
@@ -154,20 +154,18 @@
             }
         }        
 
-        public function validate($rol){
+        public function validate(){
             $sql = "SELECT 1 
             FROM usuarios u
-            JOIN roles r ON u.id_usuario = r.id_usuario
-            WHERE u.usuario = ? AND u.pass = ? AND r.descripcion = ?";
-            try 
-            {
+            WHERE u.usuario = ? AND u.password = ?";
+            try {
                 $conexion = OpenDataBase();
                 $stmt = mysqli_prepare($conexion, $sql);
                 if (!$stmt) {
                     die("Error en la preparación de la consulta: " . mysqli_error($conexion));
                 }
-                echo "Consulta SQL: " . $sql;
-                mysqli_stmt_bind_param($stmt, "sss", $this->username, $this->password, $rol);
+                
+                mysqli_stmt_bind_param($stmt, "ss", $this->username, $this->password);
                 mysqli_stmt_execute($stmt);
                 mysqli_stmt_store_result($stmt);
                 if (mysqli_stmt_num_rows($stmt) > 0)

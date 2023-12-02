@@ -116,3 +116,18 @@ VALUES ('empleado9@example.com', 'Sergio', 'Hernandez', true);
 -- Insert 10
 INSERT INTO Empleados (correo, nombre, apellidos, activo) 
 VALUES ('empleado10@example.com', 'Carmen', 'Diaz', true);
+
+
+
+
+
+INSERT INTO Usuarios (usuario, password, activo) VALUES
+('usuario1', 'clave1', 1),
+('usuario2', 'clave2', 1),
+('usuario3', 'clave3', 0);
+
+
+INSERT INTO Roles (descripcion, id_usuario) VALUES
+('Rol de Administrador', 1), 
+('Rol de Usuario', 2),       
+('Rol de Invitado', 3);    
