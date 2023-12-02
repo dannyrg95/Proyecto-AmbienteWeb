@@ -21,7 +21,7 @@
                             <a href="#" class="">Tareas</a>                    
                         </li>
                         <li>
-                            <a href="#" class="">Proyectos</a>                   
+                            <a href="' . ROOT . '/Views/proyectos'  . '" class="">Proyectos</a>                   
                         </li>
                         <li>
                             <a href="' . ROOT . '/Views/empleados' . '" class="">Empleados</a>  
