@@ -1,8 +1,6 @@
 <?php
 
 include_once('database.php');
-include_once("../../global.php"); 
-include_once(MODELS_PATH . "/proyectoModel.php");
 
 class ProyectoModel {
     
@@ -30,7 +28,29 @@ class ProyectoModel {
         return $proyectos;
     }
 
-    // Puedes agregar más funciones aquí según tus necesidades (crear, editar, borrar proyectos, etc.).
+    public function agregarProyecto($nombre, $fechaInicio, $fechaFin) {
+        $sql = "INSERT INTO Proyectos (nombre, fecha_inicio, fecha_fin) VALUES ('$nombre', '$fechaInicio', '$fechaFin')";
+        $result = ExecuteQuery($sql);
+
+        if (!$result) {
+            echo 'Error al agregar proyecto: ' . mysqli_error();
+            return false;
+        }
+
+        return true;
+    }
+
+    public function modificarProyecto($idProyecto, $nombre, $fechaInicio, $fechaFin) {
+        $sql = "UPDATE Proyectos SET nombre='$nombre', fecha_inicio='$fechaInicio', fecha_fin='$fechaFin' WHERE id_proyecto=$idProyecto";
+        $result = ExecuteQuery($sql);
+
+        if (!$result) {
+            echo 'Error al modificar proyecto: ' . mysqli_error();
+            return false;
+        }
+
+        return true;
+    }
 }
 
 ?>
