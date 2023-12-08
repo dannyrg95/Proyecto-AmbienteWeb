@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,500;1,500&display=swap');
- 
- :root {
+
+:root {
     --blue: #3454D1;
     --wine: #69353F;
     --green: #758173;
@@ -9,9 +9,9 @@
     --info: #17a2b8;
     --warning: #ffc107;
     --danger: #ff1919;
-   
+
     --font-family: "Montserrat", "Roboto", sans-serif;
-  }
+}
 
 * {
     padding: 0;
@@ -34,7 +34,7 @@ ul li {
     position: relative;
 }
 
-.header-navbar-list li:not(:first-child):after, .sign-in-up li::after {
+.header-navbar-list li:not(:first-child)::after, .sign-in-up li::after {
     content: "";
     position: absolute;
     width: 100%;
@@ -110,10 +110,6 @@ ul li {
 }
 /* ------------------ */
 
-
-
-
-
 /* Footer */
 footer {
     width: 100%;
@@ -125,10 +121,97 @@ footer {
 /* ------------ */
 
 
+/* Logout header */
 
+.logout-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    cursor: pointer;
+}
+
+.logout-header::after {
+   content: none !important;
+}
+
+.logout-header i, .logout-header {
+    font-size: 1rem;
+}
+
+/* ------------------ */
+
+/*formulario usuarios*/
+
+select {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    width: 30%;
+    background-color: #eee;
+    cursor: pointer;
+    appearance: none;
+}
+
+.password-container {
+    border: none;
+    background: #eee;
+    border-radius: 20px;
+    padding: .83em 1.2em;
+    width: 50%;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-container input {
+    min-width: 80%;
+    background: #eee;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
+
+.password-container i {
+    cursor: pointer;
+}
+
+
+/* ----------------- */
+
+
+.buton-select-rol{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.role-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    margin: 0 10px;
+    border: 1px solid #000;
+    background-color: #fff;
+    transition: background-color 0.3s;
+}
+
+.role-btn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.role-icon {
+    font-size: 24px;
+    padding: 10px;
+    align-items: center;
+}
+
+/* ------------ */
 
 /* Empleados */
-.form-empleados {
+.form-empleados, .form-rol, .form-usuarios {
     display: flex;
     margin: 0 auto;
     margin-top: 10rem;
@@ -144,22 +227,22 @@ footer {
     position: relative;
 }
 
-input {
+.form-empleados > input, .form-rol > input, .form-usuarios > input {
     border: none;
     background: #eee;
     border-radius: 20px;
     padding: 1em 1.2em;
-    width: 40%;
+    width: 50%;
     outline: none;
 }
 
-.form-empleados h2 {
+.form-empleados h2, .form-rol h2, .form-usuarios h2, .form-register {
     margin-bottom: 2rem;
     font-size: 2rem;
     font-weight: bold;
 }
 
-.form-empleados button {
+.form-empleados button, .boton-usuarios, .role-btn {
     border: none;
     outline: none;
     background: var(--blue);
@@ -172,24 +255,26 @@ input {
     cursor: pointer;
     transition: transform .4s ease-in;
     box-shadow: 3px 8px #000;
+    width: fit-content;
 }
 
-.form-empleados button:hover {
+.form-empleados button:hover, .boton-usuarios:hover {
     transform: translateY(-10%) scale(1.01);
 }
 
-.empleados-container {
+.empleados-container, .usuarios-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 1.5rem auto;    
+    margin: 0 auto;    
     margin-bottom: 47.3rem;
     width: 80%;
     flex-wrap: wrap;
+    min-height: 20.6vh;
     gap: 2rem;
 }
 
-.empleado {
+.empleado, .usuario {
     min-width: 280px;
     padding: 2em 3em;
     width: 30%;
@@ -221,27 +306,27 @@ input {
     transition: opacity .4s ease-in-out;
 }
 
-.opciones .delete-empleado, .edit-empleado{
+.opciones .delete-empleado, .edit-empleado, .edit-usuario, .delete-usuario { 
     border: 3px solid var(--danger);
     border-radius: 30px;
     padding: .4em .6em;
 }
 
-.delete-empleado i {
+.delete-empleado i, .delete-usuario i {
     color: var(--danger);
     font-size: 1.5rem;
 }
 
-.opciones .edit-empleado  {
+.edit-empleado, .edit-usuario  {
     border: 3px solid var(--blue);
 }
 
-.edit-empleado i {
+.edit-empleado i, .edit-usuario i {
     color: var(--blue);
     font-size: 1.5rem;
 }
 
-.empleado:hover .opciones {
+.empleado:hover .opciones, .usuario:hover .opciones {
     opacity: 1;
 }
 
@@ -251,10 +336,8 @@ input {
     padding: 2rem;
 }
 .opciones-empleado a {
-    /* background: var(--blue); */
     background-color: #fff;
     padding: 1em 2.5em;
-    /* color: #fff; */
     color: #000;
     border-radius: 25px;
     font-size: 1.2rem;
@@ -393,10 +476,14 @@ th {
         font-size: 1.5rem;
     }
 
-    .empleados-container {
+    .empleados-container, .usuarios-container {
         margin: 0 auto;
         width: 90%;
-        margin-bottom: 10rem;
+        margin-bottom: 42.9rem;
+    }
+
+    .form-rol {
+        width: 80%;
     }
 
     .form-empleados {
@@ -407,12 +494,12 @@ th {
         width: 80%;
     }
 
-    .empleado {
+    .empleado, .usuario {
         width: 80%;
     }
 
-    .empleado:first-child {
+    .empleado:first-child, .usuario:first-child {
         margin-top: 10rem;
     }
-     
+
 }

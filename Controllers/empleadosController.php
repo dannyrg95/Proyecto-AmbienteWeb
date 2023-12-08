@@ -1,6 +1,6 @@
 <?php    
     include_once(MODELS_PATH . "/empleadosModel.php");
-    
+    session_start();
     $empleadoModel = new EmpleadoModel();
     if (isset($_POST["crearEmpleado"])) {
         $nombre = $_POST["nombre"];
@@ -22,8 +22,6 @@
         $empleadoModel->Actualizar($id, $nombre, $correo, $apellidos); 
         header("Location: " . ROOT . "/Views/empleados");
     }
-
-
 
     function Actualizar() {
         global $empleadoModel;
