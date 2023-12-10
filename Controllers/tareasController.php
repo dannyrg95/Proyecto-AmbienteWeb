@@ -3,8 +3,8 @@
 
     $tareaModel = new TareaModel();
     if (isset($_POST["crearTarea"])) {
-        $nombreTarea = $_POST["nombreTarea"];
-        $descripcionTarea = $_POST["descripcionTarea"];
-        $fechalimiteTarea = $_POST["fechalimiteTarea"];
-        $usuarioTarea = $_POST["usuarioTarea"];
+        $tituloTarea = $_POST["tituloTarea"];
+        $horasTarea = $_POST["horasTarea"];
+        $id_empleadoTarea = $_POST["id_empleadoTarea"];
+        $tareaModel->Agregar($titulo, $horas, $id_empleado);
     }
