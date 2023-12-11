@@ -1,24 +1,6 @@
 <?php
-
-include_once("../../global.php"); 
-include_once(MODELS_PATH . "/tareasModel.php");
-
-function mostrarTareas() {
-    // Crear una instancia del modelo de tareas
-    $tareasModel = new TareasModel(); 
-    // Obtener todas las tareas
-    $Tareas = $tareasModel->obtenerTarea(); 
-
-    // Mostrar las tareas en una lista HTML
-    echo '<ul>';
-    foreach ($Tareas as $Tareas) {
-        echo '<li>' . $Tareas['titulo'] . ' - Horas: ' . $Tareas['horas'] . ' - Empleado: ' . $Tareas['id_empleado'] . '</li>';
-    }
-    echo '</ul>';
-}
-
-?>
-<?php
+    include_once("../../global.php"); 
+    include_once(MODELS_PATH . "/tareasModel.php");
     include_once(VIEWS_PATH . "/layout.php");
 ?>
 <!DOCTYPE html>
@@ -26,6 +8,12 @@ function mostrarTareas() {
         <?php MostrarHead("Inicio")?>
         <body>
             <?php MostrarHeader()?>
+            <div class="opciones-tarea">
+                <a class="new-tarea" href="<?php  echo ROOT . "/Views/empleados/agregarEmpleados.php"?>">
+                    <i class="fa-solid fa-plus"></i>
+                    Agregar
+                </a> 
+            </div>
             <?php mostrarTareas()?>
 
         

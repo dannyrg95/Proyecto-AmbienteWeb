@@ -17,11 +17,12 @@ function authorizeUser($username, $roles)
 if (isset($_POST['registrar'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $correo = $_POST['correo'];
 
-    $identity = new Identity($username, $password);
+    $identity = new Identity($username, $password, $correo);
 
-    if ($identity->register($rol)) {
-        authorizeUser($username, $identity->$getRoles());
+    if ($identity->register()) {
+        authorizeUser($username, $identity->getRoles());
     } else {
         echo "Error al registrar el usuario.";
     }
@@ -90,6 +91,19 @@ function ObtenerTodos()
         </div>';
     }
 }
+
+
+function verificarToken($token) {
+    $usuario = UsuariosModel::verificarToken(strval($token));
+    
+    return '
+    <div class="usuario-activo">
+        ' . ($usuario ? '<h1>La cuenta con el correo fue activada exitósamente</h1>' : '<h1>No se pudo activar la cuenta</h1>') . '
+        <a href="' . ROOT  .'"><i class="fa-solid fa-arrow-left"></i> Volver</a>
+    </div>';
+   
+}
+
 
 if (isset($_GET["eliminar"])) {
     $id = $_GET["eliminar"];

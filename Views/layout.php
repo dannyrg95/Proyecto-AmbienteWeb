@@ -12,27 +12,28 @@
                     <ul class="header-navbar-list">
                             
                         <li>
-                            <a href="' . ROOT . '/' . '" class="">Project Management</a>
+                            <a href="' . ROOT . '/' . '">Project Management</a>
                         </li>
                         <li>
-                            <a href="' . ROOT . '/' . '" class="">Inicio</a>
+                            <a href="' . ROOT . '/' . '">Inicio</a>
                         </li>
                         <li>
-                            <a href="#" class="">Tareas</a>                    
+                            <a href="'  .  ROOT . '/Views/tareas' . '">Tareas</a>                    
                         </li>
                         <li>
-                            <a href="' . ROOT . '/Views/proyectos'  . '" class="">Proyectos</a>                   
+                            <a href="' . ROOT . '/Views/proyectos'  . '">Proyectos</a>                   
                         </li>
                         <li>
-                            <a href="' . ROOT . '/Views/empleados' . '" class="">Empleados</a>  
+                            <a href="' . ROOT . '/Views/empleados' . '">Empleados</a>  
                         </li>';
 
                         // Verificar si el usuario ha iniciado sesión
                         if (isset($_SESSION['roles'])) {
-                            // if (in_array("Administrador", $_SESSION['roles']))
-                            echo '<li>
-                                    <a href="' . ROOT . '/Views/usuarios" class="">Usuarios</a>  
-                                </li>';
+                            if (in_array("Administrador", $_SESSION['roles'])) {
+                                echo '<li>
+                                        <a href="' . ROOT . '/Views/usuarios" class="">Usuarios</a>  
+                                    </li>';
+                            }
                         }
                     echo '</ul>
                     

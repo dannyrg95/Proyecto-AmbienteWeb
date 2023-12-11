@@ -12,8 +12,11 @@
         
         <form class="form-usuarios"  method="post">
             <h2>Registro de Usuario</h2>
-            <label for="username">Nombre de Usuario:</label>
+            <label for="username">Nombre:</label>
             <input type="text" id="username" name="username" required>
+
+            <label for="correo">Correo:</label>
+            <input type="email" id="correo" name="correo" required>
 
             <label for="password">Contraseña:</label>
             <div class="password-container">
