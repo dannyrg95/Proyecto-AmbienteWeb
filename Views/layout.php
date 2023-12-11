@@ -38,7 +38,7 @@
                     
                     <ul class="sign-in-up">';
 
-        if (isset($_SESSION['loggedIn'])){
+        if (isset($_SESSION['loggedIn']) && isset($_SESSION["username"])){
             echo '
                 <li class="logout-header">
                     <a href="' . ROOT . '/logout.php' . '">

@@ -236,7 +236,7 @@ select {
 
 /* Empleados */
 
-.form-empleados, .form-rol, .form-usuarios, .proyectos-agregar-form{
+.form-empleados, .form-rol, .form-usuarios, .proyectos-agregar-form {
     display: flex;
     margin: 0 auto;
     margin-bottom: 35.7rem;
@@ -262,13 +262,13 @@ select {
     outline: none;
 }
 
-.form-empleados h2, .form-rol h2, .form-usuarios h2, .form-register {
+.form-empleados h2, .form-rol h2, .form-usuarios h2, .form-register, .modificar-proyecto-titulo {
     margin-bottom: 2rem;
     font-size: 2rem;
     font-weight: bold;
 }
 
-.form-empleados button, .boton-usuarios, .role-btn, .inner-container-agregar-empleado-proyecto button {
+.form-empleados button, .boton-usuarios, .role-btn, .inner-container-agregar-empleado-proyecto button,  .proyectos-agregar-form button {
     border: none;
     outline: none;
     background: var(--blue);

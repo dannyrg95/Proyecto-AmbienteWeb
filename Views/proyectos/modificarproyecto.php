@@ -47,23 +47,25 @@ function mostrarFormularioModificacion() {
                 <?php
                 MostrarHeader();
                 ?>
+                
+                <form class="proyectos-agregar-form" action="modificarproyectos.php" method="post">
+                    <a href="<?php echo ROOT . "/Views/proyectos/proyectosEmpleados.php" . "?id=" . $_GET["id_proyecto"] ?>" class="atras">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Atrás
+                    </a>
+                    <h1 class="modificar-proyecto-titulo">Modificar Proyecto</h1>
+                    <input type="hidden" name="proyecto_id" value="<?php echo $proyecto['id_proyecto']; ?>">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" name="nombre" value="<?php echo $proyecto['nombre']; ?>" required>
 
-                <main class="main">
-                    <h1>Modificar Proyecto</h1>
-                    <form action="modificarproyectos.php" method="post">
-                        <input type="hidden" name="proyecto_id" value="<?php echo $proyecto['id_proyecto']; ?>">
-                        <label for="nombre">Nombre:</label>
-                        <input type="text" name="nombre" value="<?php echo $proyecto['nombre']; ?>" required>
+                    <label for="fecha_inicio">Fecha Inicio:</label>
+                    <input type="date" name="fecha_inicio" value="<?php echo $proyecto['fecha_inicio']; ?>" required>
 
-                        <label for="fecha_inicio">Fecha Inicio:</label>
-                        <input type="date" name="fecha_inicio" value="<?php echo $proyecto['fecha_inicio']; ?>" required>
+                    <label for="fecha_fin">Fecha Fin:</label>
+                    <input type="date" name="fecha_fin" value="<?php echo $proyecto['fecha_fin']; ?>" required>
 
-                        <label for="fecha_fin">Fecha Fin:</label>
-                        <input type="date" name="fecha_fin" value="<?php echo $proyecto['fecha_fin']; ?>" required>
-
-                        <button type="submit">Guardar Cambios</button>
-                    </form>
-                </main>
+                    <button type="submit">Guardar Cambios</button>
+                </form>
 
                 <?php
                 MostrarFooter();

@@ -76,8 +76,9 @@
 
         public static function ObtenerTodosAgregados($idProyecto) {
             $database = OpenDataBase();
-            $stmt = $database->prepare("SELECT DISTINCT empleados.*, proyectos_empleados.id_proyecto FROM Empleados LEFT JOIN Proyectos_Empleados ON empleados.id_empleado = proyectos_empleados.id_empleado
-            WHERE proyectos_empleados.id_proyecto != ? OR proyectos_empleados.id_proyecto IS NULL");
+            $stmt = $database->prepare("SELECT * FROM Empleados 
+                WHERE id_empleado NOT IN 
+                (SELECT DISTINCT empleados.id_empleado FROM Proyectos_Empleados INNER JOIN Empleados ON proyectos_empleados.id_empleado = empleados.id_empleado AND id_proyecto = ?);");
             $stmt->bind_param("i", $idProyecto);
             $stmt->execute();
             $result = $stmt->get_result();

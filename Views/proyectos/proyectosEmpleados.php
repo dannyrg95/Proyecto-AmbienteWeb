@@ -65,7 +65,7 @@ include_once(VIEWS_PATH . "/layout.php");
                 url: "<?php echo ROOT?>/api/rest/apiRest.php",
                 method: "POST",
                 contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                data: "deleteEmpleado=1&idEmpleado=" + encodeURIComponent(id) + "&proyecto=" + encodeURIComponent(<?php echo $_GET["id"]?>)
+                data: "deleteEmpleado=1&proyecto=" + encodeURIComponent(<?php echo $_GET["id"]?>)
             }).done(function(response) {
                 const result = JSON.parse(response);
                 
@@ -85,7 +85,7 @@ include_once(VIEWS_PATH . "/layout.php");
                 const result = JSON.parse(response);
                 
                 if (result.success) {
-                    location.replace("http://localhost/<?php echo ROOT?>/proyectos/");
+                    location.replace("http://localhost/<?php echo ROOT?>/Views/proyectos/");
                 } 
             });
         }
