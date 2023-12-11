@@ -4,7 +4,17 @@ include_once("../../global.php");
 include_once(MODELS_PATH . "/tareasModel.php");
 
 function mostrarTareas() {
-    // PENDIENTE...
+    // Crear una instancia del modelo de tareas
+    $tareasModel = new TareasModel(); 
+    // Obtener todas las tareas
+    $Tareas = $tareasModel->obtenerTarea(); 
+
+    // Mostrar las tareas en una lista HTML
+    echo '<ul>';
+    foreach ($Tareas as $Tareas) {
+        echo '<li>' . $Tareas['titulo'] . ' - Horas: ' . $Tareas['horas'] . ' - Empleado: ' . $Tareas['id_empleado'] . '</li>';
+    }
+    echo '</ul>';
 }
 
 ?>
