@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'fecha_inicio' => $_POST['fecha_inicio'],
         'fecha_fin' => $_POST['fecha_fin']
     );
-    $proyectoModel->editarProyecto($proyectoId, $nuevosDatos);
+    $proyectoModel->modificarProyecto($proyectoId, $nuevosDatos);
 
     // Redirecciona a la página de proyectos después de la modificación
     header("Location: proyectos_vista.php");
@@ -66,7 +66,7 @@ function mostrarFormularioModificacion() {
                 </main>
 
                 <?php
-                Footer();
+                MostrarFooter();
                 ?>
             </body>
 

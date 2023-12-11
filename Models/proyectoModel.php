@@ -27,6 +27,27 @@ class ProyectoModel {
 
         return $proyectos;
     }
+    
+    public function obtenerProyectoPorId($id) {
+        $sql = "SELECT * FROM Proyectos WHERE id_proyecto = $id";
+        $result = ExecuteQuery($sql);
+
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+
+            $proyecto = array(
+                'id_proyecto' => $row['id_proyecto'],
+                'nombre' => $row['nombre'],
+                'fecha_inicio' => $row['fecha_inicio'],
+                'fecha_fin' => $row['fecha_fin']
+            );
+
+            return $proyecto;
+        } else {
+            echo 'Error al ejecutar la consulta: ' . mysqli_error();
+            return null;
+        }
+    }
 
     public function agregarProyecto($nombre, $fechaInicio, $fechaFin) {
         $sql = "INSERT INTO Proyectos (nombre, fecha_inicio, fecha_fin) VALUES ('$nombre', '$fechaInicio', '$fechaFin')";
@@ -96,5 +117,3 @@ class ProyectoModel {
         return $empleado;
     }
 }
-
-?>

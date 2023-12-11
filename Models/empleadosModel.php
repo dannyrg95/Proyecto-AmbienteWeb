@@ -74,7 +74,7 @@
             return $empleados;
         }
 
-        public function ObtenerTodosAgregados($idProyecto) {
+        public static function ObtenerTodosAgregados($idProyecto) {
             $database = OpenDataBase();
             $stmt = $database->prepare("SELECT DISTINCT empleados.*, proyectos_empleados.id_proyecto FROM Empleados LEFT JOIN Proyectos_Empleados ON empleados.id_empleado = proyectos_empleados.id_empleado
             WHERE proyectos_empleados.id_proyecto != ? OR proyectos_empleados.id_proyecto IS NULL");
