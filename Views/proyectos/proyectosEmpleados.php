@@ -30,7 +30,7 @@ include_once(VIEWS_PATH . "/layout.php");
         })
 
         const close = document.querySelector(".close-pop-up");
-        const open = document.querySelector(".new-empleado");
+        const open = document.querySelector(".new-empleado") || document.querySelector(".new-empleado-empty")
         const model = document.querySelector(".pop-up-agregar-empleados-proyecto");
         close.addEventListener("click", () => {            
             model.classList.toggle("close");
@@ -42,9 +42,8 @@ include_once(VIEWS_PATH . "/layout.php");
 
 
         function addEmpleadoEmpty() {
-            const empleados = Array.from(document.querySelector(".agregar-empleado-proyecto").children);
+            const [first, ...empleados] = Array.from(document.querySelector(".agregar-empleado-proyecto").children);
             
-
             const checkValues = empleados.flatMap(empleado => empleado.children[2].children[0].checked ? parseInt(empleado.children[0].innerText) : []);
         
             $.ajax({

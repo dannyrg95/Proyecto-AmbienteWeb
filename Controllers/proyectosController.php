@@ -68,17 +68,21 @@ class ProyectoController {
     public static function obtenerEmpleadosProyectoTemplate($id) {
         $empleados = ProyectoModel::obtenerEmpleadosProyecto($id);
         $proyecto = ProyectoModel::Obtener($id);
-        $template = '<div class="proyecto-empleado-info"><h1 class="proyectos-empleado-titulo" style="text-align: center">' . $proyecto["nombre"] . '</h1>';
+        $template = '<div class="proyecto-empleado-info"><h1 class="proyectos-empleado-titulo">' . $proyecto["nombre"] . '</h1>';
         if (empty($empleados)) {
             return $template . "</div>" . '
                 <div class="empty-container">
                     <h1>El proyecto no cuenta con empleados asignados</h1>
-                    <a href=""><i class="fa-solid fa-circle-plus"></i></a>
+                    <a class="new-empleado-empty" href="#"><i class="fa-solid fa-circle-plus"></i></a>
                 </div>
             ';
         }
         $template .= '
+        <div class="opciones-proyecto">
             <a class="new-empleado">Agregar</a>
+            <a class="modificar-proyecto">Modificar Proyecto</a>
+            <a class="eliminar-proyecto">Eliminar Proyecto</a>
+        </div>
         </div>
         <div class="empleados-proyecto">';
         foreach($empleados as $empleado) {
