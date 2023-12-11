@@ -117,6 +117,7 @@ VALUES ('empleado9@example.com', 'Sergio', 'Hernandez', true);
 INSERT INTO Empleados (correo, nombre, apellidos, activo) 
 VALUES ('empleado10@example.com', 'Carmen', 'Diaz', true);
 
+
 -- Insert 1 Tareas
 INSERT INTO Tareas (titulo, horas, id_empleado) 
 VALUES ('Anunciar Peliculas que ingresaran proximamente', 8, 101);
@@ -128,4 +129,18 @@ VALUES ('Ingresar Top 10 de peliculas mas vistas en CR', 4, 102);
 -- Insert 3 Tareas
 INSERT INTO Tareas (titulo, horas, id_empleado) 
 VALUES ('Validar cuales peliculas son las menos vistas en CR', 6, 103);
+
+
+
+
+INSERT INTO Usuarios (usuario, password, activo) VALUES
+('usuario1', 'clave1', 1),
+('usuario2', 'clave2', 1),
+('usuario3', 'clave3', 0);
+
+
+INSERT INTO Roles (descripcion, id_usuario) VALUES
+('Rol de Administrador', 1), 
+('Rol de Usuario', 2),       
+('Rol de Invitado', 3);    
 

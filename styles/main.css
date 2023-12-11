@@ -34,7 +34,7 @@ ul li {
     position: relative;
 }
 
-.header-navbar-list li:not(:first-child):after, .sign-in-up li::after {
+.header-navbar-list li:not(:first-child)::after, .sign-in-up li::after {
     content: "";
     position: absolute;
     width: 100%;
@@ -131,6 +131,10 @@ footer {
     cursor: pointer;
 }
 
+.logout-header::after {
+   content: none !important;
+}
+
 .logout-header i, .logout-header {
     font-size: 1rem;
 }
@@ -140,14 +144,38 @@ footer {
 /*formulario usuarios*/
 
 select {
-    padding: 8px 16px;
+    padding: 1em 1.2em;
     border: none;
-    border-radius: 4px;
-    width: 30%;
+    border-radius: 20px;
+    width: 50%;
     background-color: #eee;
     cursor: pointer;
     appearance: none;
 }
+
+.form-usuarios .botones-roles-usuarios {
+    border: none;
+    outline: none;
+    background: var(--blue);
+    color: #fff;
+    padding: .5em 3em;
+    font-weight: bold;
+    margin-top: -1rem;
+    font-size: 1rem;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: transform .4s ease-in;
+    box-shadow: 1.5px 4px #000;
+    width: fit-content;
+}
+.botones-roles-usuarios.agregar {
+    background-color: var(--success);
+}
+
+.botones-roles-usuarios.eliminar {
+    background-color: var(--danger);
+}
+
 
 .password-container {
     border: none;
@@ -207,11 +235,12 @@ select {
 /* ------------ */
 
 /* Empleados */
-.form-empleados, .form-rol, .form-usuarios {
+
+.form-empleados, .form-rol, .form-usuarios, .proyectos-agregar-form {
     display: flex;
     margin: 0 auto;
-    margin-top: 10rem;
     margin-bottom: 35.7rem;
+    margin-top: 5rem;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -223,7 +252,8 @@ select {
     position: relative;
 }
 
-.form-empleados > input, .form-rol > input, .form-usuarios > input {
+
+.form-empleados > input, .form-rol > input, .form-usuarios > input,.proyectos-agregar-form > input {
     border: none;
     background: #eee;
     border-radius: 20px;
@@ -232,13 +262,13 @@ select {
     outline: none;
 }
 
-.form-empleados h2, .form-rol h2, .form-usuarios h2, .form-register {
+.form-empleados h2, .form-rol h2, .form-usuarios h2, .form-register, .modificar-proyecto-titulo {
     margin-bottom: 2rem;
     font-size: 2rem;
     font-weight: bold;
 }
 
-.form-empleados button, .boton-usuarios, .role-btn {
+.form-empleados button, .boton-usuarios, .role-btn, .inner-container-agregar-empleado-proyecto button,  .proyectos-agregar-form button {
     border: none;
     outline: none;
     background: var(--blue);
@@ -258,9 +288,9 @@ select {
     transform: translateY(-10%) scale(1.01);
 }
 
-.empleados-container, .usuarios-container {
+.empleados-container, .usuarios-container, .empleados-proyecto {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     margin: 0 auto;    
     margin-bottom: 47.3rem;
@@ -270,7 +300,7 @@ select {
     gap: 2rem;
 }
 
-.empleado, .usuario {
+.empleado, .usuario, .empleados-proyecto > div {
     min-width: 280px;
     padding: 2em 3em;
     width: 30%;
@@ -293,7 +323,8 @@ select {
     width: 100%;
     height: 100%;
     opacity: 0;
-    backdrop-filter: blur(4px) brightness(75%);
+    backdrop-filter: blur(4px);
+    background: #00000025;
     padding: 2em;
     display: flex;
     gap: 10%;
@@ -302,13 +333,13 @@ select {
     transition: opacity .4s ease-in-out;
 }
 
-.opciones .delete-empleado, .edit-empleado, .edit-usuario, .delete-usuario { 
+.opciones .delete-empleado, .edit-empleado, .edit-usuario, .delete-usuario, .delete-empleado-proyecto { 
     border: 3px solid var(--danger);
     border-radius: 30px;
     padding: .4em .6em;
 }
 
-.delete-empleado i, .delete-usuario i {
+.delete-empleado i, .delete-usuario i, .delete-empleado-proyecto i {
     color: var(--danger);
     font-size: 1.5rem;
 }
@@ -322,7 +353,7 @@ select {
     font-size: 1.5rem;
 }
 
-.empleado:hover .opciones, .usuario:hover .opciones {
+.empleado:hover .opciones, .usuario:hover .opciones, .empleados-proyecto > div:hover .opciones {
     opacity: 1;
 }
 
@@ -330,8 +361,9 @@ select {
     width: 80%;
     margin: 0 auto;
     padding: 2rem;
+    margin-top: 4rem;
 }
-.opciones-empleado a {
+.opciones-empleado a, .new-empleado, .modificar-proyecto, .eliminar-proyecto {
     background-color: #fff;
     padding: 1em 2.5em;
     color: #000;
@@ -339,13 +371,16 @@ select {
     font-size: 1.2rem;
     box-shadow: inset 0 0 0 #0000, 6px 6px 15px 2px #0002;
     transition: all .3s ease-in;
+    cursor: pointer;
+    min-width: 290px;
+    text-align: center;
 }
 
-.opciones-empleado a:hover {
+.opciones-empleado a:hover, .new-empleado:hover, .modificar-proyecto:hover, .eliminar-proyecto:hover {
     box-shadow: inset 0 0 15px 2px #0002, 0 0 0 #0000;
 }
 
-.opciones-empleado a:active {
+.opciones-empleado a:active, .new-empleado:active, .modificar-proyecto:active, .eliminar-proyecto:active {
     box-shadow: inset 0 0 15px 7px #0002, 0 0 0 #0000;
 }
 
@@ -361,14 +396,17 @@ select {
 /* ------------------- */
 
 /*PROYECTOS*/
+.proyectos-titulo, .proyectos-empleado-titulo {
+    text-align: center;
+    margin-bottom: 2rem;
+}
 
-
-/* Estilos para la tabla */
 table {
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
     border-collapse: collapse;
     margin-top: 20px;
-    margin-bottom: 30rem;
+    margin-bottom: 45rem;
 }
 
 table, th, td {
@@ -380,18 +418,214 @@ th, td {
     text-align: left;
 }
 
+tr:hover {
+    background: #eee;
+    cursor: pointer;
+}
+
 th {
     background-color: #f2f2f2;
 }
 
+.empty-container {
+    display: flex;
+    height: 20%;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-bottom: 50rem;
+    gap: 1rem;
+}
+
+.empty-container a i {
+    font-size: 5rem;
+    color:#28a745
+}
+
+.empty-container h1 {
+    text-align: center;
+}
+
+.empleados-proyecto > div > * {
+    color: #fff;
+}
+
+.empleados-proyecto > div {
+    gap: .5rem;
+}
 
 
+.pop-up-agregar-empleados-proyecto {
+    position: fixed;
+    inset: 0 0 0 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1;
+    transform: translateY(0);
+    transition: opacity .3s, transform .4s ease-in-out;
+}
+
+.inner-container-agregar-empleado-proyecto {
+    width: 90%;
+    padding: 2em 4em; 
+    min-height: 50%;
+    gap: 1rem;
+    box-shadow: 0 0 10px #00000025,
+    0 0 0 2100px #0001;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    background: #ffffff10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inner-container-agregar-empleado-proyecto a {
+    align-self: flex-start;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.inner-container-agregar-empleado-proyecto button {
+    background: #28a745;
+}
+
+.agregar-empleado-proyecto {
+    width: 90%;
+    padding: 2em 4em; 
+    min-height: 50%;
+    gap: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.agregar-empleado-proyecto li {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 80%;
+    gap: 1rem;
+}
+
+.agregar-empleado-proyecto li p {
+    max-width: 50%;
+    margin-right: auto;
+    margin-left: .5rem;
+}
+
+.agregar-empleado-proyecto li input {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.agregar-empleado-proyecto li h3, .agregar-empleado-proyecto li p {
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+
+.agregar-empleado-proyecto li:first-child p, .agregar-empleado-proyecto li:first-child h3 {
+    font-weight: bold;    
+}
+
+.container-checkbox {
+    position: relative;
+}
+
+.container-checkbox label {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 28px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 28px;
+}
+
+.container-checkbox label:after {
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    content: "";
+    height: 6px;
+    left: 7px;
+    opacity: 0;
+    position: absolute;
+    top: 8px;
+    transform: rotate(-45deg);
+    width: 12px;
+}
+
+.container-checkbox input[type="checkbox"] {
+    visibility: hidden;
+}
+
+.container-checkbox input[type="checkbox"]:checked + label {
+    background-color: #66bb6a;
+}
+
+.container-checkbox input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+}
+
+.pop-up-agregar-empleados-proyecto.close {
+    transform: translateY(7%);
+    opacity: 0;
+    z-index: -100;
+
+}
+
+.proyecto-empleado-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto;
+    flex-direction: column;
+    margin-bottom: 4rem;
+}
+
+.proyecto-empleado-info > a {
+    align-self: flex-start;
+}
+
+.opciones-proyecto {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+    width: 100%;
+}
+
+.modificar-proyecto {
+    color: var(--blue)
+}
+
+.eliminar-proyecto {
+    color: var(--danger)
+}
+
+.new-empleado {
+    color: var(--success);
+}
 
 /*--------------------*/
 
 
 /* Vista adaptada para teléfonos */
-@media (max-width: 800px) {
+@media (max-width: 815px) {
     .hamburger-menu.close + .header {
         transform: translateX(-100%);
         transition: transform .7s ease-in-out;
@@ -413,10 +647,11 @@ th {
         min-height: 100vh;
         position: fixed;
         z-index: 100;
+        top: 0;
         transform: translateX(0);
         transition: transform .7s ease-in-out;
     }
-
+    
     .header-container::after {
         content: "";
         width: 200%;
@@ -434,6 +669,7 @@ th {
     .header-container {
         width: 100%;
         position: relative;
+        top: 0;
         background-color: #fff;
         min-width: 250px;
         min-height: 100vh;
@@ -449,7 +685,7 @@ th {
         min-height: 100vh;
         transition: transform .7s ease-in-out;
     }
-
+    
     .hamburger-menu {
         display: inline;        
     }
@@ -458,45 +694,66 @@ th {
         flex-direction: column;
         gap: 2rem;
     }
-
+    
     .sign-in-up {
         margin-top: auto;
         width: 100%;
         height: 200px;
     }
-
-
+    
+    
     .header-navbar-list li:first-child {
         margin-bottom: 2.5rem;
         margin-top: 6rem;
         text-align: center;
         font-size: 1.5rem;
     }
-
-    .empleados-container, .usuarios-container {
+    
+    .empleados-container, .usuarios-container, .empleados-proyecto {
         margin: 0 auto;
         width: 90%;
-        margin-bottom: 42.9rem;
+        margin-bottom: 20rem;
+        margin-top: 1rem
     }
-
-    .form-rol {
+    
+    .form-rol, .form-empleados, .form-empleados input, .empleado, .usuario, .empleados-proyecto > div, .form-usuarios, .form-usuarios input, .form-usuarios .password-container {
         width: 80%;
     }
 
-    .form-empleados {
-        width: 80%;
+    .proyectos-titulo, .proyectos-empleado-titulo, .empleados-proyecto-empty {
+       margin-top: 5rem;
+    }   
+
+    table {
+        width: 98%;
+    }
+    
+    .inner-container-agregar-empleado-proyecto {
+        padding: 2em;
     }
 
-    .form-empleados input {
-        width: 80%;
+    .agregar-empleado-proyecto {
+        padding: 0;
+        width: 100%;
+    }
+    .close-pop-up {
+        margin-left: .6em;
     }
 
-    .empleado, .usuario {
-        width: 80%;
+    .proyecto-empleado-info {
+        width: 95%;
     }
 
-    .empleado:first-child, .usuario:first-child {
-        margin-top: 10rem;
+    .opciones-proyecto {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
+}
 
+
+@media (max-width: 900px) {
+   .opciones-proyecto {
+        flex-direction: column;
+    }
 }

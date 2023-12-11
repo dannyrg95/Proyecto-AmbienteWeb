@@ -1,14 +1,16 @@
 <?php
-    include_once("global.php");
-    include_once(VIEWS_PATH . "/layout.php");
-    session_start();
+
+include_once("../../global.php"); 
+include_once(CONTORLLERS_PATH . "/proyectosController.php");
+include_once(VIEWS_PATH . "/layout.php");
 ?>
 <!DOCTYPE html>
     <html lang="en">
-        <?php MostrarHead("Inicio")?>
+        <?php MostrarHead("Proyectos")?>
         <body>
             <?php MostrarHeader()?>
-            
+            <h1 class="proyectos-titulo">Proyectos</h1>
+            <?php ProyectoController::mostrarProyectos()?>
             
             <?php MostrarFooter()?>
         </body>

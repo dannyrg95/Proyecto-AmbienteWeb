@@ -1,6 +1,6 @@
 <?php
     include_once("database.php");
-
+    
     class EmpleadoModel {
         public function Agregar($nombre, $correo, $apellidos) {
             $database = OpenDataBase();
@@ -73,8 +73,21 @@
             closeDataBase($database);
             return $empleados;
         }
+
+        public static function ObtenerTodosAgregados($idProyecto) {
+            $database = OpenDataBase();
+            $stmt = $database->prepare("SELECT * FROM Empleados 
+                WHERE id_empleado NOT IN 
+                (SELECT DISTINCT empleados.id_empleado FROM Proyectos_Empleados INNER JOIN Empleados ON proyectos_empleados.id_empleado = empleados.id_empleado AND id_proyecto = ?);");
+            $stmt->bind_param("i", $idProyecto);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $empleados = $result->fetch_all(MYSQLI_ASSOC);
+            closeDataBase($database);
+            return $empleados;
+        }
     
-        public function Obtener($id) {
+        public static function Obtener($id) {
             $database = OpenDataBase();
             $stmt = $database->prepare("SELECT * FROM Empleados WHERE id_empleado = ?");
             $stmt->bind_param("i", $id);

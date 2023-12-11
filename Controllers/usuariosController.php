@@ -1,14 +1,15 @@
 <?php
 include_once(MODELS_PATH . "/usuariosModel.php");
 include_once(MODELS_PATH . "/rolesModel.php");
+session_start();
 
 $usuarioModel = new UsuariosModel();
 
-function authorizeUser($username, $rol)
+function authorizeUser($username, $roles)
 {
     $_SESSION["loggedIn"] = true;
     $_SESSION["username"] = $username;
-    $_SESSION["rol"] = $rol;
+    $_SESSION["roles"] = $roles;
 
     header('location: ' . ROOT . '/index.php');
 }
@@ -16,12 +17,11 @@ function authorizeUser($username, $rol)
 if (isset($_POST['registrar'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $rol = $_POST['rol'];
 
     $identity = new Identity($username, $password);
 
     if ($identity->register($rol)) {
-        authorizeUser($username, $rol);
+        authorizeUser($username, $identity->$getRoles());
     } else {
         echo "Error al registrar el usuario.";
     }
@@ -30,16 +30,43 @@ if (isset($_POST['registrar'])) {
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $rol = $_POST['rol'];
+    
 
     $identity = new Identity($username, $password);
 
-    if ($identity->validate($rol)) {
-        authorizeUser($username, $rol);
+    if ($identity->validate()) {
+        authorizeUser($username, $identity->getRoles());
     } else {
         echo "Error al registrar el usuario.";
     }
 }
+
+function ObtenerRolesUsuario($usuario) {
+    $rolModel = new RolModel();
+        $roles = $rolModel->ObtenerRolesUsuario($usuario);
+        $rolesString = "<ul class='roles'><p>Roles:</p>";
+
+        for ($j = 0; $j < count($roles); $j++) {
+            $rolesString .= '<li>'.  $roles[$j]["descripcion"]  . '</li>';
+        }
+
+        $rolesString .= "</ul>";
+        return $rolesString;
+}
+
+function ObtenerRolesUsuarioOpciones($usuario) {
+    $rolModel = new RolModel();
+        $roles = $rolModel->ObtenerRolesUsuario($usuario);
+        $rolesString = "";
+
+        for ($j = 0; $j < count($roles); $j++) {
+            $rolesString .= '<option value="' . $roles[$j]["descripcion"]  .  '">' .  $roles[$j]["descripcion"]  . '</option>';
+        }
+
+        
+        return $rolesString;
+}
+
 
 function ObtenerTodos()
 {
@@ -47,15 +74,7 @@ function ObtenerTodos()
     $usuarios = $usuarioModel->ObtenerTodos();
 
     for ($i = 0; $i < count($usuarios); $i++) {
-        $rolModel = new RolModel();
-        $roles = $rolModel->ObtenerRolesUsuario($usuarios[$i]["id_usuario"]);
-        $rolesString = "<div>";
-
-        for ($j = 0; $j < count($roles); $j++) {
-            $rolesString .= '<p>'.  $roles[$j]["descripcion"]  . '</p>';
-        }
-
-        $rolesString .= "</div>";
+        $rolesString = ObtenerRolesUsuario($usuarios[$i]["id_usuario"]);
         echo '
         <div class="usuario">
             <h3>Nombre de Usuario: ' . $usuarios[$i]["usuario"] . '</h3>
@@ -91,8 +110,7 @@ function Modificar() {
 if (isset($_POST["actualizarUsuario"])) {
     $usuario = $_POST["usuario"];
     $password = $_POST["password"];
-    $descripcion = $_POST["descripcion"];
     $id = $_GET["actualizar"];
-    $usuarioModel->Modificar($id, $usuario, $password, $descripcion); 
+    $usuarioModel->Modificar($id, $usuario, $password); 
     header("Location: " . ROOT . "/Views/usuarios");
 }

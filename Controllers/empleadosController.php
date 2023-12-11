@@ -1,7 +1,7 @@
 <?php    
     include_once(MODELS_PATH . "/empleadosModel.php");
+    session_start();
     
-    $empleadoModel = new EmpleadoModel();
     if (isset($_POST["crearEmpleado"])) {
         $nombre = $_POST["nombre"];
         $correo = $_POST["correo"];
@@ -11,7 +11,7 @@
     
     if (isset($_GET["eliminar"])) {
         $id = $_GET["eliminar"];
-        $empleadoModel->Eliminar($id);
+        EmpleadoModel::Eliminar($id);
         header("Location: " . ROOT . "/Views/empleados");
     }
     if (isset($_POST["actualizarEmpleado"])) {
@@ -19,23 +19,23 @@
         $correo = $_POST["correo"];
         $apellidos = $_POST["apellidos"];
         $id = $_GET["actualizar"];
-        $empleadoModel->Actualizar($id, $nombre, $correo, $apellidos); 
+        EmpleadoModel::Actualizar($id, $nombre, $correo, $apellidos); 
         header("Location: " . ROOT . "/Views/empleados");
     }
 
     function Actualizar() {
-        global $empleadoModel;
+        
 
         if (isset($_GET["actualizar"])) {
             $id = $_GET["actualizar"];
             $_POST["id"] = $id;
-            return $empleadoModel->Obtener($id);
+            return EmpleadoModel::Obtener($id);
         }
     }
 
     function ObtenerTodos() {
-        global $empleadoModel;
-        $empleados = $empleadoModel->ObtenerTodos();
+        
+        $empleados = EmpleadoModel::ObtenerTodos();
         
         for ($i = 0; $i < count($empleados); $i++) {
             echo '

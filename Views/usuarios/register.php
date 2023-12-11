@@ -16,13 +16,10 @@
             <input type="text" id="username" name="username" required>
 
             <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
-
-            <label for="rol">Rol:</label>
-            <select id="rol" name="rol">
-                <option value="usuario">Usuario</option>
-                <option value="admin">Admin</option>
-            </select>
+            <div class="password-container">
+                <input type="password" id="password" name="password" required>
+                <i class="eye fa-sharp fa-solid fa-eye-slash"></i>
+            </div>
 
             <button class="boton-usuarios" type="submit" name="registrar">Registrar</button>
         </form>
@@ -43,6 +40,18 @@
         }
 
         burger.classList.toggle("close");
+    })
+
+    const closeEye = document.querySelector(".eye");
+    const password = document.querySelector("#password");
+    closeEye.addEventListener("click", () => {
+        if (closeEye.classList.contains("fa-eye-slash")) {
+            closeEye.classList.replace("fa-eye-slash", "fa-eye");
+            password.setAttribute("type", "text");
+        } else {
+            closeEye.classList.replace("fa-eye", "fa-eye-slash");
+            password.setAttribute("type", "password");
+        }
     })
 </script>
 
