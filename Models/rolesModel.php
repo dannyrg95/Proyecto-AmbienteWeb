@@ -3,85 +3,36 @@
 
     class RolModel {
 
-        //Falta de adaptar
-        public function Agregar($nombre, $correo, $apellidos) {
+        
+        public static function Agregar($role, $id) {
             $database = OpenDataBase();
-            $stmt = $database->prepare("INSERT INTO Roles(nombre, correo, apellidos, activo) VALUES (?, ?, ?, true)");
-            $stmt->bind_param("sss", $nombre, $correo, $apellidos);
+            $stmt = $database->prepare("INSERT INTO Roles(descripcion, id_usuario) VALUES (?, ?)");
+            $stmt->bind_param("si", $role, $id);
             $stmt->execute();
             closeDataBase($database);
         }
     
-        //Falta de adaptar
-        public function Eliminar($id) {
+        
+        public static function Eliminar($id, $role) {
             $database = OpenDataBase();
-            $stmt = $database->prepare("DELETE FROM Empleados WHERE id_empleado = ?");
-            $stmt->bind_param("i", $id);
+            $stmt = $database->prepare("DELETE FROM Roles WHERE id_usuario = ? AND descripcion = ?");
+            $stmt->bind_param("is", $id, $role);
             $stmt->execute();
             closeDataBase($database);
         }
-        
-
-        //Falta de adaptar
-        public function Actualizar($id, $nombre, $correo, $apellidos) {
-            $sql = "UPDATE Empleados SET ";
-            $params = array();
-            $paramTypes = "";
-            
-            if ($nombre !== null) {
-                array_push($params, "nombre=?");
-                $paramTypes .= "s";
-            }
-            
-            if ($correo !== null) {
-                array_push($params, "correo=?");
-                $paramTypes .= "s";
-            }
-            
-            if ($apellidos !== null) {
-                array_push($params, "apellidos=?");
-                $paramTypes .= "s";
-            }
-        
-            $sql .= join(", ", $params);
-            $sql .= " WHERE id_empleado = ?";
-            $paramTypes .= "i"; 
-        
-            $paramValues = array_filter([$nombre, $correo, $apellidos, $id], function ($value) {
-                return $value !== null;
-            });
-        
-            $database = OpenDataBase();
-            $stmt = $database->prepare($sql);
-            if (!$stmt) {
-                die('Error en la preparación de la consulta: ' . $database->error);
-            }
-        
+               
     
-            array_unshift($paramValues, $paramTypes);            
-            $stmt->bind_param(...$paramValues);    
-            $stmt->execute();
-
-            if ($stmt->error) {
-                die('Error en la ejecución de la consulta: ' . $stmt->error);
-            }
-        
-            
-            $stmt->close();
-            closeDataBase($database);
-        }
-    
-        public function ObtenerTodos() {
+        public static function ObtenerTodos() {
             $database = OpenDataBase();
-            $result = $database->query("SELECT * FROM Empleados");
+            $result = $database->query("SELECT * FROM Roles");
             $empleados = $result->fetch_all(MYSQLI_ASSOC);
             closeDataBase($database);
             return $empleados;
         }
         
-        public function Obtener($id) {
+        public static function Obtener($id) {
             $database = OpenDataBase();
-            $stmt = $database->prepare("SELECT * FROM Empleados WHERE id_empleado = ?");
+            $stmt = $database->prepare("SELECT * FROM Roles WHERE id_rol = ?");
             $stmt->bind_param("i", $id);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -90,7 +41,7 @@
             return $empleado;
         }
 
-        public function ObtenerRolesUsuario($id) {
+        public static function ObtenerRolesUsuario($id) {
             $database = OpenDataBase();
             $stmt = $database->prepare("SELECT * FROM Roles WHERE id_usuario = ?");
             $stmt->bind_param("i", $id);

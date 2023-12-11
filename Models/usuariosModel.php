@@ -33,7 +33,7 @@
             closeDataBase($database);
         }
 
-        public function Obtener($id) {
+        public static function Obtener($id) {
             $database = OpenDataBase();
             $stmt = $database->prepare("SELECT u.*, r.descripcion AS rol_descripcion FROM Usuarios u LEFT JOIN Roles r ON u.id_usuario = r.id_usuario WHERE u.id_usuario = ?");
             $stmt->bind_param("i", $id);
@@ -45,7 +45,7 @@
             return $empleado;
         }
 
-        public function Modificar($id, $usuario, $password, $descripcion) {
+        public function Modificar($id, $usuario, $password) {
             $sqlUsuarios = "UPDATE Usuarios SET ";
             $paramsUsuarios = array();
             $paramTypesUsuarios = "";
@@ -83,25 +83,7 @@
             }
             
             $stmtUsuarios->close();
-            
-            if ($descripcion !== null) {
-                $sqlRoles = "UPDATE Roles SET descripcion=? WHERE id_usuario = ?";
-                $stmtRoles = $database->prepare($sqlRoles);
-            
-                if (!$stmtRoles) {
-                    die('Error en la preparación de la consulta Roles: ' . $database->error);
-                }
-            
-                $stmtRoles->bind_param("si", $descripcion, $id);
-                $stmtRoles->execute();
-            
-                if ($stmtRoles->error) {
-                    die('Error en la ejecución de la consulta Roles: ' . $stmtRoles->error);
-                }
-            
-                $stmtRoles->close();
-            }
-            
+
             closeDataBase($database);
         }        
     }
@@ -111,7 +93,7 @@
             parent::__construct($username,$password);
         }
 
-        public function register($rol) {
+        public function register() {
             $conexion = OpenDataBase();
             $sqlUsuario = "INSERT INTO usuarios (usuario, password, activo) VALUES (?, ?, 1)";
             
@@ -124,9 +106,9 @@
                     $idUsuario = mysqli_insert_id($conexion);
                     
                     if ($idUsuario) {
-                        $sqlRol = "INSERT INTO roles (descripcion, id_usuario) VALUES (?, ?)";
+                        $sqlRol = "INSERT INTO roles (descripcion, id_usuario) VALUES ('Usuario', ?)";
                         $stmtRol = mysqli_prepare($conexion, $sqlRol);
-                        mysqli_stmt_bind_param($stmtRol, "si", $rol, $idUsuario);
+                        mysqli_stmt_bind_param($stmtRol, "si", $idUsuario);
                         
                         try {
                             $resultRol = mysqli_stmt_execute($stmtRol);
@@ -185,6 +167,20 @@
             }
         
         return false;
+        }
+
+        public function getRoles() {
+            
+            $database = OpenDataBase();
+            
+            $stmt = $database->prepare("SELECT roles.descripcion FROM Roles INNER JOIN Usuarios ON usuarios.id_usuario = roles.id_usuario AND usuarios.usuario = ?");
+            $stmt->bind_param("s", $this->username);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+            $roles = $result->fetch_assoc();
+            closeDataBase($database);
+            return $roles;
         }
     }
 ?>

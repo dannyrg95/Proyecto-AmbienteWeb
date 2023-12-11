@@ -26,14 +26,27 @@ $usuario = Modificar();
             <i class="eye fa-sharp fa-solid fa-eye-slash"></i>
         </div>
 
-        <!-- <label for="descripcion">Roles:</label>
-        <select id="descripcion" name="descripcion">
-            <option value="" <?php echo empty($usuario['rol_descripcion'] == 'Usuario') ? 'selected' : ''; ?> disabled>Nuevo Rol</option>
-            <option value="usuario" <?php echo ($usuario['rol_descripcion'] == 'Usuario') ? 'selected' : ''; ?>>Usuario</option>
-            <option value="admin" <?php echo ($usuario['rol_descripcion'] == 'Admin') ? 'selected' : ''; ?>>Admin</option>
-        </select> -->
+        <label for="descripcion">Agregar Roles:</label>
+        <select class="role-selector" name="descripcion">
+            <option value="" disabled>Seleccione</option>
+            <option value="Usuario">Usuario</option>
+            <option value="Administrador">Administrador</option>
+        </select>
+        <button class="botones-roles-usuarios agregar" onclick="addRole(<?php echo $usuario['id_usuario']?>)" type="button">Agregar</button>
+        
+        <label for="descripcion">Eliminar Roles :</label>
+        <select class="role-selector" name="descripcion">
+            <option value="" disabled>Seleccione</option>
+            <?php
+                echo ObtenerRolesUsuarioOpciones($usuario["id_usuario"]);
+            
+            ?>
+        </select>
+        <button class="botones-roles-usuarios eliminar" onclick="deleteRole(<?php echo $usuario['id_usuario']?>)" type="button">Eliminar</button>
+        
+        <?php echo ObtenerRolesUsuario($usuario["id_usuario"]) ?>
 
-        <button class="boton-usuarios" type="submit" name="actualizarUsuario">Actualizar</button>
+        <button class="boton-usuarios"  type="submit" name="actualizarUsuario">Guardar</button>
     </form>
 
     <?php MostrarFooter() ?>
@@ -62,7 +75,42 @@ $usuario = Modificar();
             closeEye.classList.replace("fa-eye", "fa-eye-slash");
             password.setAttribute("type", "password");
         }
-    })
+    });
+
+    
+    function deleteRole(id) {
+        const deleteSelection = document.querySelectorAll(".role-selector")[1];
+        const role = deleteSelection.value;
+        $.ajax({
+            url: "<?php echo ROOT?>/api/rest/apiRest.php",
+            method: "POST",
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            data: "deleteRole=1&role=" + encodeURIComponent(role) + "&idUsuario=" + encodeURIComponent(id)
+        }).done(function(response) {
+            const result = JSON.parse(response);
+            if (result.success) {
+                location.reload();
+            } 
+        });
+    }
+
+    function addRole(id) {
+        const deleteSelection = document.querySelectorAll(".role-selector")[0];
+        const role = deleteSelection.value;
+        $.ajax({
+            url: "<?php echo ROOT?>/api/rest/apiRest.php",
+            method: "POST",
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            data: "addRole=1&role=" + encodeURIComponent(role) + "&idUsuario=" + encodeURIComponent(id)
+        }).done(function(response) {
+            const result = JSON.parse(response);
+            if (result.success) {
+                location.reload();
+            } 
+        });
+    }
+
+</script>
 
 </script>
 

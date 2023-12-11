@@ -40,6 +40,14 @@ class ProyectoModel {
         return true;
     }
 
+    public function agregarEmpleadoProyecto($idEmpleado, $idProyecto) {
+        $database = OpenDataBase();
+        $stmt = $database->prepare("INSERT INTO Proyectos_Empleados (id_empleado, id_proyecto) VALUES (?, ?)");
+        $stmt->bind_param("ii", $idEmpleado, $idProyecto);
+        $stmt->execute();
+        closeDataBase($database);
+    }
+
     public function modificarProyecto($idProyecto, $nombre, $fechaInicio, $fechaFin) {
         $sql = "UPDATE Proyectos SET nombre='$nombre', fecha_inicio='$fechaInicio', fecha_fin='$fechaFin' WHERE id_proyecto=$idProyecto";
         $result = ExecuteQuery($sql);
@@ -50,6 +58,42 @@ class ProyectoModel {
         }
 
         return true;
+    }
+
+    public static function obtenerEmpleadosProyecto($id) {
+        
+        $database = OpenDataBase();
+            
+        $stmt = $database->prepare("SELECT DISTINCT empleados.* FROM Proyectos_Empleados INNER JOIN Empleados ON proyectos_empleados.id_empleado = empleados.id_empleado AND id_proyecto = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $empleados = $result->fetch_all(MYSQLI_ASSOC);
+        closeDataBase($database);
+        return $empleados;
+    }
+
+    public static function deleteEmpleadoProyecto($idEmpleado, $idProyecto) {
+        
+        $database = OpenDataBase();
+            
+        $stmt = $database->prepare("DELETE FROM Proyectos_Empleados WHERE id_proyecto = ? AND id_empleado = ?");
+        $stmt->bind_param("ii", $idProyecto, $idEmpleado);
+        $stmt->execute();
+       closeDataBase($database);
+     
+    }
+
+    public static function Obtener($id) {
+        $database = OpenDataBase();
+        $stmt = $database->prepare("SELECT * FROM Proyectos WHERE id_proyecto = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $empleado = $result->fetch_assoc();
+        closeDataBase($database);
+        return $empleado;
     }
 }
 
