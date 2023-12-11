@@ -44,7 +44,6 @@ include_once(VIEWS_PATH . "/layout.php");
         function addEmpleadoEmpty() {
             const [first, ...empleados] = Array.from(document.querySelector(".agregar-empleado-proyecto").children);
             
-
             const checkValues = empleados.flatMap(empleado => empleado.children[2].children[0].checked ? parseInt(empleado.children[0].innerText) : []);
         
             $.ajax({

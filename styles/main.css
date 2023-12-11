@@ -323,7 +323,8 @@ select {
     width: 100%;
     height: 100%;
     opacity: 0;
-    backdrop-filter: blur(4px) brightness(75%);
+    backdrop-filter: blur(4px);
+    background: #00000025;
     padding: 2em;
     display: flex;
     gap: 10%;
@@ -362,7 +363,7 @@ select {
     padding: 2rem;
     margin-top: 4rem;
 }
-.opciones-empleado a, .new-empleado {
+.opciones-empleado a, .new-empleado, .modificar-proyecto, .eliminar-proyecto {
     background-color: #fff;
     padding: 1em 2.5em;
     color: #000;
@@ -371,13 +372,15 @@ select {
     box-shadow: inset 0 0 0 #0000, 6px 6px 15px 2px #0002;
     transition: all .3s ease-in;
     cursor: pointer;
+    min-width: 290px;
+    text-align: center;
 }
 
-.opciones-empleado a:hover, .new-empleado:hover {
+.opciones-empleado a:hover, .new-empleado:hover, .modificar-proyecto:hover, .eliminar-proyecto:hover {
     box-shadow: inset 0 0 15px 2px #0002, 0 0 0 #0000;
 }
 
-.opciones-empleado a:active, .new-empleado:active {
+.opciones-empleado a:active, .new-empleado:active, .modificar-proyecto:active, .eliminar-proyecto:active {
     box-shadow: inset 0 0 15px 7px #0002, 0 0 0 #0000;
 }
 
@@ -441,6 +444,10 @@ th {
     color:#28a745
 }
 
+.empty-container h1 {
+    text-align: center;
+}
+
 .empleados-proyecto > div > * {
     color: #fff;
 }
@@ -461,7 +468,7 @@ th {
     flex-direction: column;
     z-index: 1;
     transform: translateY(0);
-    transition: opacity .2s, transform .4s ease-in;
+    transition: opacity .3s, transform .4s ease-in-out;
 }
 
 .inner-container-agregar-empleado-proyecto {
@@ -469,10 +476,11 @@ th {
     padding: 2em 4em; 
     min-height: 50%;
     gap: 1rem;
-    box-shadow: 0 0 10px #0002,
+    box-shadow: 0 0 10px #00000025,
     0 0 0 2100px #0001;
     border-radius: 20px;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(10px);
+    background: #ffffff10;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -526,7 +534,7 @@ th {
     font-weight: normal;
 }
 
-.agregar-empleado-proyecto li h3:first-child, .agregar-empleado-proyecto li p:first-child {
+.agregar-empleado-proyecto li:first-child p, .agregar-empleado-proyecto li:first-child h3 {
     font-weight: bold;    
 }
 
@@ -589,15 +597,35 @@ th {
     margin-bottom: 4rem;
 }
 
-.proyecto-empleado-info a {
+.proyecto-empleado-info > a {
     align-self: flex-start;
+}
+
+.opciones-proyecto {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+    width: 100%;
+}
+
+.modificar-proyecto {
+    color: var(--blue)
+}
+
+.eliminar-proyecto {
+    color: var(--danger)
+}
+
+.new-empleado {
+    color: var(--success);
 }
 
 /*--------------------*/
 
 
 /* Vista adaptada para teléfonos */
-@media (max-width: 800px) {
+@media (max-width: 815px) {
     .hamburger-menu.close + .header {
         transform: translateX(-100%);
         transition: transform .7s ease-in-out;
@@ -710,5 +738,22 @@ th {
     }
     .close-pop-up {
         margin-left: .6em;
+    }
+
+    .proyecto-empleado-info {
+        width: 95%;
+    }
+
+    .opciones-proyecto {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+
+@media (max-width: 900px) {
+   .opciones-proyecto {
+        flex-direction: column;
     }
 }
