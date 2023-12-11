@@ -73,8 +73,20 @@
             closeDataBase($database);
             return $empleados;
         }
+
+        public function ObtenerTodosAgregados($idProyecto) {
+            $database = OpenDataBase();
+            $stmt = $database->prepare("SELECT DISTINCT empleados.*, proyectos_empleados.id_proyecto FROM Empleados LEFT JOIN Proyectos_Empleados ON empleados.id_empleado = proyectos_empleados.id_empleado
+            WHERE proyectos_empleados.id_proyecto != ? OR proyectos_empleados.id_proyecto IS NULL");
+            $stmt->bind_param("i", $idProyecto);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $empleados = $result->fetch_all(MYSQLI_ASSOC);
+            closeDataBase($database);
+            return $empleados;
+        }
     
-        public function Obtener($id) {
+        public static function Obtener($id) {
             $database = OpenDataBase();
             $stmt = $database->prepare("SELECT * FROM Empleados WHERE id_empleado = ?");
             $stmt->bind_param("i", $id);

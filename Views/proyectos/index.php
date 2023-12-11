@@ -9,7 +9,7 @@ include_once(VIEWS_PATH . "/layout.php");
         <?php MostrarHead("Proyectos")?>
         <body>
             <?php MostrarHeader()?>
-
+            <h1 class="proyectos-titulo">Proyectos</h1>
             <?php ProyectoController::mostrarProyectos()?>
             
             <?php MostrarFooter()?>
