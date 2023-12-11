@@ -79,6 +79,20 @@
 
     }
 
+    if (isset($_POST["deleteProyecto"])) {
+        $idProyecto = $_POST["proyecto"];
+        
+
+        if (!isset($idProyecto)) {
+            $response = '{"success": false, "errorMessage": "Proyecto no encontrado"}';
+        }
+       ProyectoModel::Borrar($idProyecto);
+        
+        
+        $response = '{"success": true}';
+
+    }
+
     ob_end_clean();
     echo $response;
 

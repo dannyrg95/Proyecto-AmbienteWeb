@@ -95,6 +95,20 @@ class ProyectoModel {
         closeDataBase($database);
         return $empleado;
     }
+
+    public static function Borrar($id) {
+        $database = OpenDataBase();
+        $stmt = $database->prepare("DELETE FROM Proyectos WHERE id_proyecto = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        
+        $stmt = $database->prepare("DELETE FROM Proyectos_Empleados WHERE id_proyecto = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        
+        
+        closeDataBase($database);
+    }
 }
 
 ?>
