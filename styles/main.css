@@ -235,7 +235,8 @@ select {
 /* ------------ */
 
 /* Empleados */
-.form-empleados, .form-rol, .form-usuarios {
+
+.form-empleados, .form-rol, .form-usuarios, .proyectos-agregar-form{
     display: flex;
     margin: 0 auto;
     margin-bottom: 35.7rem;
@@ -252,7 +253,7 @@ select {
 }
 
 
-.form-empleados > input, .form-rol > input, .form-usuarios > input {
+.form-empleados > input, .form-rol > input, .form-usuarios > input,.proyectos-agregar-form > input {
     border: none;
     background: #eee;
     border-radius: 20px;

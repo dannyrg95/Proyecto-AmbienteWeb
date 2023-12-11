@@ -35,8 +35,8 @@ MostrarHead('Agregar Proyecto');
 
     <main class="main">
         <h1>Agregar Proyecto</h1>
-
-        <form method="post" action="">
+        
+        <form   class="proyectos-agregar-form" method="post" action="">
             <label for="nombre">Nombre del Proyecto:</label>
             <input type="text" id="nombre" name="nombre" required>
 
@@ -48,6 +48,7 @@ MostrarHead('Agregar Proyecto');
 
             <button type="submit">Agregar Proyecto</button>
         </form>
+
     </main>
 
     <?php

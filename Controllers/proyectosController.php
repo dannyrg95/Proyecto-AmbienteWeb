@@ -73,7 +73,7 @@ class ProyectoController {
             return $template . "</div>" . '
                 <div class="empty-container">
                     <h1>El proyecto no cuenta con empleados asignados</h1>
-                    <a href=""><i class="fa-solid fa-circle-plus"></i></a>
+                    <a href="#"class="new-empleado-empty"><i class="fa-solid fa-circle-plus"></i></a>
                 </div>
             ';
         }
