@@ -1,13 +1,15 @@
+</html>
 <?php
-    include_once("../../global.php"); 
-    include_once(MODELS_PATH . "/tareasModel.php");
-    include_once(VIEWS_PATH . "/layout.php");
+     include_once("../../global.php"); 
+      include_once(CONTROLLERS_PATH . "/tareasController.php");
+      include_once(VIEWS_PATH . "/layout.php");
 ?>
 <!DOCTYPE html>
     <html lang="en">
-        <?php MostrarHead("Inicio")?>
+        <?php MostrarHead("Tareas")?>
         <body>
             <?php MostrarHeader()?>
+           <h1 class="tareas-titulo">Tareas</h1>
             <div class="opciones-tarea">
                 <a class="new-tarea" href="<?php  echo ROOT . "/Views/empleados/agregarEmpleados.php"?>">
                     <i class="fa-solid fa-plus"></i>
@@ -20,9 +22,7 @@
             
             
             <?php MostrarFooter()?>
-        </body>
-
-        <script>
+          <script>
             const burger = document.querySelector(".hamburger-menu");
             burger.addEventListener("click", () => {
                 if (burger.classList.contains("close")) {
@@ -30,8 +30,10 @@
                 } else {
                     burger.innerHTML = '<i class="fa-solid fa-bars"></i>'
                 }
-                
+
                 burger.classList.toggle("close");
             })
-        </script>
+          </script>
+      </body>
     </html>
+
