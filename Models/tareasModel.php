@@ -11,14 +11,13 @@
             closeDataBase($database);
         }
         
-        public function obtenerTarea () {
+        public static function obtenerTareas() {
             $database = OpenDataBase();
             $result = $database->query("SELECT * FROM Tareas");
             $tareas = $result->fetch_all(MYSQLI_ASSOC);
             closeDataBase($database);
             return $tareas;
         }
-
 }
 
 ?>

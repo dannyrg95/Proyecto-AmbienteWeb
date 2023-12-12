@@ -53,7 +53,7 @@
         }
         foreach ($idsEmpleados as $idEmpleado) {
             ProyectoModel::agregarEmpleadoProyecto($idEmpleado, $idProyecto);
-            echo $idEmpleado;
+            
         }
         
         
@@ -87,6 +87,32 @@
             $response = '{"success": false, "errorMessage": "Proyecto no encontrado"}';
         }
        ProyectoModel::Borrar($idProyecto);
+        
+        
+        $response = '{"success": true}';
+
+    }
+
+    if (isset($_POST["addTarea"])) {
+        $idProyecto = $_POST["proyecto"];
+        $idEmpleado = $_POST["empleado"];
+        $idTarea = $_POST["idTarea"];
+        
+        
+
+        if (!isset($idEmpleado)) {
+            $response = '{"success": false, "errorMessage": "Empleado no encontrado"}';
+        }
+
+        if (!isset($idProyecto)) {
+            $response = '{"success": false, "errorMessage": "Proyecto no encontrado"}';
+        }
+
+        if (!isset($idTarea)) {
+            $response = '{"success": false, "errorMessage": "Tarea no encontrado"}';
+        }
+
+       ProyectoModel::AsignarTareaEmpleadoProyecto($idProyecto, $idTarea, $idEmpleado);
         
         
         $response = '{"success": true}';

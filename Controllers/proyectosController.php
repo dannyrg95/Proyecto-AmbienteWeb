@@ -2,6 +2,7 @@
 session_start();
 include(MODELS_PATH . "/proyectoModel.php");
 include(MODELS_PATH . "/empleadosModel.php");
+include_once(MODELS_PATH . "/tareasModel.php");
 class ProyectoController {
 
     public function getProyecto($proyectoId) {
@@ -95,13 +96,45 @@ class ProyectoController {
             <div>
                 <h3>' .  $empleado["nombre"] . " " .  $empleado["apellidos"]  . '</h3>
                 <p>' .  $empleado["correo"]  . '</p>
+                <p>Tarea: ' .  ($empleado["titulo"] ?? "Sin tareas")  . '</p>
                 <div class="opciones">
                     <a href="#" onclick="deleteEmpleado(' . $empleado["id_empleado"] . ')" class="delete-empleado-proyecto"><i class="fa-solid fa-trash"></i></a>
+                    <a class="agregar-tarea-empleado-proyecto" href="#" onclick="openModalTareas(' . $empleado["id_empleado"] . ')"><i class="fa-solid fa-list-check"></i></a>
                 </div>
             </div>';
         }
 
         $template .= '</div>';
+        return $template;
+    }
+
+    public static function agregarTareaEmpleadoPopUp() {
+        $tareas = ProyectoModel::obtenerTareasSinAsignar(); 
+        $template = '
+        <div class="inner-container-agregar-tarea-empleado-proyecto">
+            <a class="close-pop-up-tareas" href="#"><i class="fa-solid fa-xmark"></i></a>
+            <ul class="tarea-empleado-proyecto">
+                <li>
+                    <h3>Id</h3>
+                    <p>Nombre</p>
+                    <p>Horas</p>
+                </li>';
+        foreach($tareas as $tarea) {
+            $template .= '
+            <li>
+                <h3>' . $tarea["id_tarea"] .'</h3>
+                <p>' .  $tarea["titulo"] . ' </p>
+                <p>' .  $tarea["horas"] . ' </p>
+                <div class="container-checkbox">
+                    <input class="radio-tarea" type="radio" name="id_tarea" value="' .  $tarea["id_tarea"]  . '">
+                </div>
+            </li>';
+        }
+
+        $template .= '
+        </ul>
+        <button  onclick="addTarea()"><i class="fa-solid fa-plus"></i> Agregar</button>
+        </div>';
         return $template;
     }
 

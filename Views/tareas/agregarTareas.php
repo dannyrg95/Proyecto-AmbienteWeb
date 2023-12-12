@@ -17,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Redireccionar a la página principal después de agregar la tarea
     header('Location: index.php');
-    exit();
 }
 ?>
 
@@ -30,18 +29,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <?php MostrarHeader() ?>
 
-    <h1>Agregar Tarea</h1>
-    <form action="agregar_tarea.php" method="POST">
+    <form method="POST" class="tareas-form">
+        <a href="<?php echo ROOT . "/Views/tareas/"?>" class="atras">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Atrás
+        </a>
+        <h1>Agregar Tarea</h1>
         <label for="titulo">Título:</label>
-        <input type="text" name="titulo" required><br><br>
-
+        <input type="text" name="titulo" required>
         <label for="horas">Horas:</label>
-        <input type="number" name="horas" required><br><br>
+        <input type="number" name="horas" required>
 
-        <label for="id_empleado">ID Empleado:</label>
-        <input type="number" name="id_empleado" required><br><br>
-
-        <input type="submit" value="Agregar Tarea">
+        <button>Agregar</button>
     </form>
 
     <?php MostrarFooter() ?>

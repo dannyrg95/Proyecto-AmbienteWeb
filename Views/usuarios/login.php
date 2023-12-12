@@ -17,8 +17,8 @@
     <?php MostrarHeader() ?>
     <form class="form-usuarios" method="post">
         <h2>Inicio de Sesión</h2>
-        <label for="username">Usuario:</label>
-        <input type="text" id="username" name="username" required>  
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>  
         <label for="password">Contraseña:</label>
         <div class="password-container">
             <input type="password" id="password" name="password" required>

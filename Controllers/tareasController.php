@@ -13,10 +13,7 @@
     }
 
     function mostrarTareas() {
-    
-        $tareasModel = new TareasModel(); 
-        
-        $tareas = $tareasModel->obtenerTarea(); 
+        $tareas = TareasModel::obtenerTareas(); 
     
         
         echo '<div class="tareas-container">';

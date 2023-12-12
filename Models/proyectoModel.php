@@ -85,7 +85,9 @@ class ProyectoModel {
         
         $database = OpenDataBase();
             
-        $stmt = $database->prepare("SELECT DISTINCT empleados.* FROM Proyectos_Empleados INNER JOIN Empleados ON proyectos_empleados.id_empleado = empleados.id_empleado AND id_proyecto = ?");
+        $stmt = $database->prepare("SELECT * FROM 
+        (SELECT DISTINCT empleados.*, id_tarea FROM Proyectos_Empleados INNER JOIN Empleados ON proyectos_empleados.id_empleado = empleados.id_empleado AND id_proyecto = ?) EmpleadosProyecto
+        LEFT JOIN Tareas ON tareas.id_tarea = EmpleadosProyecto.id_tarea;");
         $stmt->bind_param("i", $id);
         $stmt->execute();
 
@@ -129,6 +131,24 @@ class ProyectoModel {
         
         
         closeDataBase($database);
+    }
+
+    public static function AsignarTareaEmpleadoProyecto($idProyecto, $idTarea, $idEmpleado) {
+        $database = OpenDataBase();
+        $stmt = $database->prepare("UPDATE Proyectos_Empleados SET id_tarea = ? WHERE id_proyecto = ? AND id_empleado = ?");
+        $stmt->bind_param("iii", $idTarea, $idProyecto, $idEmpleado);
+        $stmt->execute();
+        
+        closeDataBase($database);
+    }
+
+
+    public static function obtenerTareasSinAsignar() {
+        $database = OpenDataBase();
+        $result = $database->query("SELECT * FROM Tareas WHERE id_tarea NOT IN (SELECT tareas.id_tarea FROM Proyectos_Empleados INNER JOIN Tareas ON tareas.id_tarea = proyectos_empleados.id_tarea)");
+        $tareas = $result->fetch_all(MYSQLI_ASSOC);
+        closeDataBase($database);
+        return $tareas;
     }
 }
 
