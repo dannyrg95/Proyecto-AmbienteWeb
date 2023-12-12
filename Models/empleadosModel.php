@@ -66,7 +66,7 @@
             closeDataBase($database);
         }
     
-        public function ObtenerTodos() {
+        public static function ObtenerTodos() {
             $database = OpenDataBase();
             $result = $database->query("SELECT * FROM Empleados");
             $empleados = $result->fetch_all(MYSQLI_ASSOC);
