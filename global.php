@@ -6,4 +6,5 @@
     define("STYLES_PATH", PATH . "/styles"); 
     define("VIEWS_PATH", PATH . "/Views"); 
     define("USUARIOS_PATH", VIEWS_PATH . "/usuarios"); 
+    define("PHP_MAILER_PATH", PATH . "/phpmailer/phpmailer" )
 ?>

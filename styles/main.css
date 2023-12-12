@@ -143,6 +143,22 @@ footer {
 
 /*formulario usuarios*/
 
+.usuario-activo h1 {
+    text-align: center;
+}
+
+.usuario-activo {
+    margin-bottom: 57.35rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    justify-content: center;
+    flex-direction: column;
+}
+.usuario-activo a {
+    font-size: 1.5rem;
+}
+
 select {
     padding: 1em 1.2em;
     border: none;
@@ -288,7 +304,7 @@ select {
     transform: translateY(-10%) scale(1.01);
 }
 
-.empleados-container, .usuarios-container, .empleados-proyecto {
+.empleados-container, .usuarios-container, .empleados-proyecto, .tareas-container {
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -300,7 +316,7 @@ select {
     gap: 2rem;
 }
 
-.empleado, .usuario, .empleados-proyecto > div {
+.empleado, .usuario, .empleados-proyecto > div, .tarea {
     min-width: 280px;
     padding: 2em 3em;
     width: 30%;
@@ -353,20 +369,20 @@ select {
     font-size: 1.5rem;
 }
 
-.empleado:hover .opciones, .usuario:hover .opciones, .empleados-proyecto > div:hover .opciones {
+.empleado:hover .opciones, .usuario:hover .opciones, .empleados-proyecto > div:hover .opciones, .tarea:hover .opciones {
     opacity: 1;
 }
 
-.opciones-empleado {
+.opciones-empleado, .opciones-tarea {
     width: 80%;
     margin: 0 auto;
     padding: 2rem;
     margin-top: 4rem;
 }
-.opciones-empleado a, .new-empleado, .modificar-proyecto, .eliminar-proyecto {
+.opciones-empleado a, .new-empleado, .modificar-proyecto, .eliminar-proyecto, .new-tarea {
     background-color: #fff;
     padding: 1em 2.5em;
-    color: #000;
+    color: var(--success);
     border-radius: 25px;
     font-size: 1.2rem;
     box-shadow: inset 0 0 0 #0000, 6px 6px 15px 2px #0002;
@@ -376,11 +392,11 @@ select {
     text-align: center;
 }
 
-.opciones-empleado a:hover, .new-empleado:hover, .modificar-proyecto:hover, .eliminar-proyecto:hover {
+.opciones-empleado a:hover, .new-empleado:hover, .modificar-proyecto:hover, .eliminar-proyecto:hover, .new-tarea:hover {
     box-shadow: inset 0 0 15px 2px #0002, 0 0 0 #0000;
 }
 
-.opciones-empleado a:active, .new-empleado:active, .modificar-proyecto:active, .eliminar-proyecto:active {
+.opciones-empleado a:active, .new-empleado:active, .modificar-proyecto:active, .eliminar-proyecto:active, .new-tarea:active {
     box-shadow: inset 0 0 15px 7px #0002, 0 0 0 #0000;
 }
 
@@ -475,12 +491,13 @@ th {
     width: 90%;
     padding: 2em 4em; 
     min-height: 50%;
+    max-height: 50vh;
     gap: 1rem;
     box-shadow: 0 0 10px #00000025,
     0 0 0 2100px #0001;
     border-radius: 20px;
     backdrop-filter: blur(10px);
-    background: #ffffff10;
+    background: #cccccc20;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -709,14 +726,14 @@ th {
         font-size: 1.5rem;
     }
     
-    .empleados-container, .usuarios-container, .empleados-proyecto {
+    .empleados-container, .usuarios-container, .empleados-proyecto, .tareas-container {
         margin: 0 auto;
         width: 90%;
         margin-bottom: 20rem;
         margin-top: 1rem
     }
     
-    .form-rol, .form-empleados, .form-empleados input, .empleado, .usuario, .empleados-proyecto > div, .form-usuarios, .form-usuarios input, .form-usuarios .password-container {
+    .form-rol, .form-empleados, .form-empleados input, .empleado, .usuario, .empleados-proyecto > div, .form-usuarios, .form-usuarios input, .form-usuarios .password-container, .tarea {
         width: 80%;
     }
 
