@@ -40,10 +40,6 @@
             array_push($params, "horas=?");
             $paramTypes .= "s";
             }
-            if ($id_empleado !== null) {
-            array_push($params, "id_empleado=?");
-            $paramTypes .= "s";
-            }
             $sql .= join(", ", $params);
             $sql .= " WHERE id_tarea = ?";
             $paramTypes .= "i";
