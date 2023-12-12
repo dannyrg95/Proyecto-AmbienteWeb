@@ -1,6 +1,6 @@
 <?php
     include_once("../../global.php"); 
-    include_once(MODELS_PATH . "/tareasModel.php");
+    include_once(CONTORLLERS_PATH . "/tareasController.php");
     include_once(VIEWS_PATH . "/layout.php");
 ?>
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
                     Agregar
                 </a> 
             </div>
-            <?php mostrarTareas()?>
+            <?php echo mostrarTareas()?>
 
         
             
