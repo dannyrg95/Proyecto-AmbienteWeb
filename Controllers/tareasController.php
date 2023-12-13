@@ -12,6 +12,26 @@
         header('Location: tareas.php');
     }
 
+    if (isset($_GET["eliminar"])) {
+        $id_tarea = $_GET["eliminar"];
+        TareaModel::Eliminar($id);
+        header("Location: " . ROOT . "/Views/tareas");
+        }
+        if (isset($_POST["actualizarTarea"])) {
+        $titulo = $_POST["titulo"];
+        $horas = $_POST["horas"];
+        $id_tarea = $_GET["actualizar"];
+        TareaModel::Actualizar($id_tarea, $titulo, $horas);
+        header("Location: " . ROOT . "/Views/tareas");
+        }
+        function Actualizar() {
+        if (isset($_GET["actualizar"])) {
+        $id = $_GET["actualizar"];
+        $_POST["id_tarea"] = $id_tarea;
+        return TareaModel::Obtener($id_tarea);
+        }
+        }
+
     function mostrarTareas() {
         $tareas = TareasModel::obtenerTareas(); 
     
@@ -22,10 +42,10 @@
                 <h3>Titulo: ' . $tarea["titulo"]  . '</h3>
                 <p>Horas: ' . $tarea["horas"] . '</p>
                 <div class="opciones">
-                        <a href="' . ROOT . "/Views/empleados?eliminar=" . $tarea["id_tarea"]  . '" class="delete-empleado">
+                        <a href="' . ROOT . "/Views/tareas?eliminar=" . $tarea["id_tarea"]  . '" class="delete-empleado">
                             <i class="fa-solid fa-trash"></i>
                         </a>
-                        <a href="' . ROOT . "/Views/empleados/agregarEmpleados.php?actualizar=" . $tarea["id_tarea"]  . '" class="edit-empleado">
+                        <a href="' . ROOT . "/Views/tareas/agregartareas.php?actualizar=" . $tarea["id_tarea"]  . '" class="edit-empleado">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
                     </div>
