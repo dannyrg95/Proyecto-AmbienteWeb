@@ -52,5 +52,17 @@
             </div>';
         }
         echo '</div>';
+        
     }
+
+    function modificarTarea() {
+        global $tareasModel;
+
+        if (isset($_GET["actualizar"])) {
+            $id_tarea = $_GET["actualizar"];
+            // Obtener los detalles de la tarea para mostrar en el formulario de modificación
+            return $tareasModel->getTaskById($id_tarea);
+        }
+    }
+
 
