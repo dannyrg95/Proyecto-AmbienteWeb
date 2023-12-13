@@ -10,6 +10,12 @@ include_once(VIEWS_PATH . "/layout.php");
         <body>
             <?php MostrarHeader()?>
             <h1 class="proyectos-titulo">Proyectos</h1>
+            <div class="opciones-proyecto-agregar">
+            <a href="<?php  echo ROOT . "/Views/proyectos/agregarproyecto.php"?>">
+                <i class="fa-solid fa-plus"></i>
+                Agregar
+            </a>   
+        </div>
             <?php ProyectoController::mostrarProyectos()?>
             
             <?php MostrarFooter()?>

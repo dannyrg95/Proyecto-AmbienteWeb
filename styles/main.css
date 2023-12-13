@@ -384,13 +384,13 @@ select {
     opacity: 1;
 }
 
-.opciones-empleado, .opciones-tarea {
+.opciones-empleado, .opciones-tarea, .opciones-proyecto-agregar {
     width: 90%;
     margin: 0 auto;
     padding: 2rem;
     margin-top: 4rem;
 }
-.opciones-empleado a, .new-empleado, .modificar-proyecto, .eliminar-proyecto, .new-tarea {
+.opciones-empleado a, .new-empleado, .modificar-proyecto, .eliminar-proyecto, .new-tarea, .opciones-proyecto-agregar a {
     background-color: #fff;
     padding: 1em 2.5em;
     color: var(--success);
@@ -403,11 +403,11 @@ select {
     text-align: center;
 }
 
-.opciones-empleado a:hover, .new-empleado:hover, .modificar-proyecto:hover, .eliminar-proyecto:hover, .new-tarea:hover {
+.opciones-empleado a:hover, .new-empleado:hover, .modificar-proyecto:hover, .eliminar-proyecto:hover, .new-tarea:hover, .opciones-proyecto-agregar a:hover {
     box-shadow: inset 0 0 15px 2px #0002, 0 0 0 #0000;
 }
 
-.opciones-empleado a:active, .new-empleado:active, .modificar-proyecto:active, .eliminar-proyecto:active, .new-tarea:active {
+.opciones-empleado a:active, .new-empleado:active, .modificar-proyecto:active, .eliminar-proyecto:active, .new-tarea:active, .opciones-proyecto-agregar a:active {
     box-shadow: inset 0 0 15px 7px #0002, 0 0 0 #0000;
 }
 
@@ -429,7 +429,7 @@ select {
 }
 
 table {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     border-collapse: collapse;
     margin-top: 20px;

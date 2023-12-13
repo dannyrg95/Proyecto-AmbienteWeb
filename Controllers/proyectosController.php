@@ -69,7 +69,12 @@ class ProyectoController {
     public static function obtenerEmpleadosProyectoTemplate($id) {
         $empleados = ProyectoModel::obtenerEmpleadosProyecto($id);
         $proyecto = ProyectoModel::Obtener($id);
-        $template = '<div class="proyecto-empleado-info"><h1 class="proyectos-empleado-titulo">' . $proyecto["nombre"] . '</h1>';
+        $template = '<div class="proyecto-empleado-info">
+        <a href="' . ROOT . "/Views/proyectos/" . '" class="atras">
+            <i class="fa-solid fa-arrow-left"></i>
+            Atrás
+        </a>
+        <h1 class="proyectos-empleado-titulo">' . $proyecto["nombre"] . '</h1>';
         if (empty($empleados)) {
             return $template . '
                 <div class="opciones-proyecto">
@@ -87,6 +92,7 @@ class ProyectoController {
         <div class="opciones-proyecto">
             <a class="new-empleado">Agregar</a>
             <a href="' . ROOT . "/Views/proyectos/modificarproyecto.php?id_proyecto=" . $id . '" class="modificar-proyecto">Modificar Proyecto</a>
+            <a onclick="reportesProyecto(' . $id . ')" class="modificar-proyecto">Reportes</a>
             <a onclick="deleteProyecto()" class="eliminar-proyecto">Eliminar Proyecto</a>
         </div>
         </div>

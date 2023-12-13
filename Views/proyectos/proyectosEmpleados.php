@@ -128,6 +128,24 @@ include_once(VIEWS_PATH . "/layout.php");
                 } 
             });
         }
+
+        function reportesProyecto(id) {
+            $.ajax({
+                url: "<?php echo ROOT?>/api/rest/apiRest.php",
+                method: "POST",
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                data: "proyecto=1&idProyecto=" + encodeURIComponent(id)
+            }).done(function(response) {
+                const result = JSON.parse(response);
+                
+                if (result.success) {
+                    location.replace("http://localhost/<?php echo ROOT?>/Views/proyectos/");
+                } 
+            });
+        }
+
+
+
     </script>
 
 </html>

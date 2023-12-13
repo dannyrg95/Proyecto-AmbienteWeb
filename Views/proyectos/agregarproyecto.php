@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $proyectoModel = new ProyectoModel();
         $proyectoModel->agregarProyecto($nombre, $fechaInicio, $fechaFin);
+        header("Location: " . ROOT . "/Views/proyectos");
     }
 }
 

@@ -118,6 +118,21 @@
         $response = '{"success": true}';
 
     }
+   
+    if (isset($_POST["proyecto"])) {
+        $idProyecto = $_POST["idProyecto"];
+        
+    
+        if (!isset($idProyecto)) {
+            $response = '{"success": false, "errorMessage": "Proyecto no encontrado"}';
+        }
+
+       ProyectoModel::horasProyecto($idProyecto);
+        
+        
+        $response = '{"success": true}';
+
+    }
 
     ob_end_clean();
     echo $response;
