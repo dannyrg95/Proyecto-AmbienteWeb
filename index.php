@@ -8,7 +8,17 @@
         <?php MostrarHead("Inicio")?>
         <body>
             <?php MostrarHeader()?>
-            
+            <div class="info-integrantes">
+                <h1>Grupo 6 Ambiente Web Cliente/Servidor</h1>
+                <ul>
+                    <li>Joel García Rojas</li>
+                    <li>Berlín Cordero Brenes</li>
+                    <li>Carlos Calderón Leiva</li>
+                    <li>Adrián Campos Montealegre</li>
+                    <li>Diego Piedra Mena</li>
+                    <li>Danny Rojas García</li>
+                </ul>
+            </div>
             
             <?php MostrarFooter()?>
         </body>
