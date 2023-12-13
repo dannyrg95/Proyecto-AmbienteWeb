@@ -1,8 +1,9 @@
 <?php    
     include_once(MODELS_PATH . "/tareasModel.php");
+    session_start();
 
     //Metodo para agregar una nueva tarea
-    $tareaModel = new TareaModel();
+    $tareaModel = new TareasModel();
     if (isset($_POST["crearTarea"])) {
         $tituloTarea = $_POST["tituloTarea"];
         $horasTarea = $_POST["horasTarea"];
@@ -32,10 +33,7 @@
         }
 
     function mostrarTareas() {
-    
-        $tareasModel = new TareasModel(); 
-        
-        $tareas = $tareasModel->obtenerTarea(); 
+        $tareas = TareasModel::obtenerTareas(); 
     
         
         echo '<div class="tareas-container">';

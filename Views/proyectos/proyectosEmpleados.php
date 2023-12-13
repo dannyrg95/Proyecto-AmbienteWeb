@@ -13,6 +13,10 @@ include_once(VIEWS_PATH . "/layout.php");
             <?php echo ProyectoController::agregarEmpleadosProyectoPopUp()?>
         </div>
 
+        <div class="pop-up-agregar-tarea-empleados-proyecto close">
+            <?php echo ProyectoController::agregarTareaEmpleadoPopUp()?>
+        </div>
+
         <?php echo ProyectoController::obtenerEmpleadosProyectoTemplate($_GET["id"])?>
         
         <?php MostrarFooter()?>
@@ -29,16 +33,33 @@ include_once(VIEWS_PATH . "/layout.php");
             burger.classList.toggle("close");
         })
 
-        const close = document.querySelector(".close-pop-up");
-        const open = document.querySelector(".new-empleado") || document.querySelector(".new-empleado-empty")
-        const model = document.querySelector(".pop-up-agregar-empleados-proyecto");
-        close.addEventListener("click", () => {            
-            model.classList.toggle("close");
+        const closeEmpleados = document.querySelector(".close-pop-up");
+        const openEmpleados = document.querySelector(".new-empleado") || document.querySelector(".new-empleado-empty")
+        const modalEmpleados = document.querySelector(".pop-up-agregar-empleados-proyecto");
+
+        const modalTareas = document.querySelector(".pop-up-agregar-tarea-empleados-proyecto");
+        const closeTareas = document.querySelector(".close-pop-up-tareas");
+
+        closeEmpleados.addEventListener("click", () => {            
+            modalEmpleados.classList.toggle("close");
         })
 
-        open.addEventListener("click", () => {            
-            model.classList.toggle("close");
+        openEmpleados.addEventListener("click", () => {            
+            modalEmpleados.classList.toggle("close");
         })
+
+        closeTareas.addEventListener("click", () => {
+            modalTareas.classList.toggle("close");
+        })
+
+
+
+        function openModalTareas(idEmpleado) {
+            modalTareas.classList.toggle("close");
+            
+            const boton = document.querySelector(".inner-container-agregar-tarea-empleado-proyecto button");
+            boton.setAttribute("empleado", idEmpleado);
+        }
 
 
         function addEmpleadoEmpty() {
@@ -60,12 +81,30 @@ include_once(VIEWS_PATH . "/layout.php");
             });
         }
 
+        function addTarea() {
+            const tarea = document.querySelector('input[name="id_tarea"]:checked').value;
+            const boton = document.querySelector(".inner-container-agregar-tarea-empleado-proyecto button");
+        
+            $.ajax({
+                url: "<?php echo ROOT?>/api/rest/apiRest.php",
+                method: "POST",
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                data: "addTarea=1&idTarea=" + encodeURIComponent(tarea) + "&proyecto=" + encodeURIComponent(<?php echo $_GET["id"]?>) + "&empleado=" + encodeURIComponent(boton.getAttribute("empleado"))
+            }).done(function(response) {
+                const result = JSON.parse(response);
+                
+                if (result.success) {
+                    location.reload();
+                } 
+            });
+        }
+
         function deleteEmpleado(id) {
             $.ajax({
                 url: "<?php echo ROOT?>/api/rest/apiRest.php",
                 method: "POST",
                 contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                data: "deleteEmpleado=1&proyecto=" + encodeURIComponent(<?php echo $_GET["id"]?>)
+                data: "deleteEmpleado=1&proyecto=" + encodeURIComponent(<?php echo $_GET["id"]?>) + "&idEmpleado=" + encodeURIComponent(id)
             }).done(function(response) {
                 const result = JSON.parse(response);
                 

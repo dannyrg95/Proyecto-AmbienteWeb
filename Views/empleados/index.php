@@ -8,6 +8,7 @@
     <?php MostrarHead("Empleados")?>
     <body>
         <?php MostrarHeader()?>
+        <h1 class="empleados-titulo">Empleados</h1>
         <div class="opciones-empleado">
             <a href="<?php  echo ROOT . "/Views/empleados/agregarEmpleados.php"?>">
                 <i class="fa-solid fa-plus"></i>

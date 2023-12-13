@@ -19,9 +19,9 @@ if (isset($_POST['registrar'])) {
     $password = $_POST['password'];
     $correo = $_POST['correo'];
 
-    $identity = new Identity($username, $password, $correo);
+    $identity = new Identity($correo, $password);
 
-    if ($identity->register()) {
+    if ($identity->register($username)) {
         authorizeUser($username, $identity->getRoles());
     } else {
         echo "Error al registrar el usuario.";
@@ -29,14 +29,14 @@ if (isset($_POST['registrar'])) {
 }
 
 if (isset($_POST['login'])) {
-    $username = $_POST['username'];
+    $correo = $_POST['email'];
     $password = $_POST['password'];
-    
+    echo $correo;
 
-    $identity = new Identity($username, $password);
+    $identity = new Identity($correo, $password);
 
     if ($identity->validate()) {
-        authorizeUser($username, $identity->getRoles());
+        authorizeUser($identity->Obtener()["usuario"], $identity->getRoles());
     } else {
         echo "Error al registrar el usuario.";
     }
@@ -78,7 +78,7 @@ function ObtenerTodos()
         $rolesString = ObtenerRolesUsuario($usuarios[$i]["id_usuario"]);
         echo '
         <div class="usuario">
-            <h3>Nombre de Usuario: ' . $usuarios[$i]["usuario"] . '</h3>
+            <h3>Nombre: ' . $usuarios[$i]["usuario"] . '</h3>
             ' . $rolesString . '
             <div class="opciones">
                 <a href="' . ROOT . "/Views/usuarios?eliminar=" . $usuarios[$i]["id_usuario"]  . '" class="delete-usuario">

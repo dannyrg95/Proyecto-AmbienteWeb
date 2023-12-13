@@ -1,8 +1,7 @@
-</html>
 <?php
-     include_once("../../global.php"); 
-      include_once(CONTROLLERS_PATH . "/tareasController.php");
-      include_once(VIEWS_PATH . "/layout.php");
+    include_once("../../global.php"); 
+    include_once(CONTORLLERS_PATH . "/tareasController.php");
+    include_once(VIEWS_PATH . "/layout.php");
 ?>
 <!DOCTYPE html>
     <html lang="en">
@@ -11,12 +10,12 @@
             <?php MostrarHeader()?>
            <h1 class="tareas-titulo">Tareas</h1>
             <div class="opciones-tarea">
-                <a class="new-tarea" href="<?php  echo ROOT . "/Views/empleados/agregarEmpleados.php"?>">
+                <a class="new-tarea" href="<?php  echo ROOT . "/Views/tareas/agregarTareas.php"?>">
                     <i class="fa-solid fa-plus"></i>
                     Agregar
                 </a> 
             </div>
-            <?php mostrarTareas()?>
+            <?php echo mostrarTareas()?>
 
         
             

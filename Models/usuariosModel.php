@@ -4,12 +4,10 @@
     include_once(CONTORLLERS_PATH . "/utilities.php");
 
     class Usuarios{
-        public $username;
         public $password;
-        public $activo;
+        public $correo;
 
-        public function __construct($username,$password, $correo){
-            $this -> username = $username;
+        public function __construct($correo, $password){
             $this -> password = $password;
             $this -> correo = $correo;
         }
@@ -38,14 +36,14 @@
 
         public static function Obtener($id) {
             $database = OpenDataBase();
-            $stmt = $database->prepare("SELECT u.*, r.descripcion AS rol_descripcion FROM Usuarios u LEFT JOIN Roles r ON u.id_usuario = r.id_usuario WHERE u.id_usuario = ? AND activo = 1");
+            $stmt = $database->prepare("SELECT * FROM Usuarios  WHERE id_usuario = ? AND activo = 1");
             $stmt->bind_param("i", $id);
             $stmt->execute();
 
             $result = $stmt->get_result();
-            $empleado = $result->fetch_assoc();
+            $usuario = $result->fetch_assoc();
             closeDataBase($database);
-            return $empleado;
+            return $usuario;
         }
 
         public function Modificar($id, $usuario, $password) {
@@ -113,18 +111,18 @@
     }
 
     class Identity extends Usuarios{
-        public function __construct($username, $password, $correo){
-            parent::__construct($username, $password, $correo);
+        public function __construct($correo, $password){
+            parent::__construct($correo, $password);
         }
 
-        public function register() {
+        public function register($username) {
             $token = $this->generateToken();
             $conexion = OpenDataBase();
             $sqlUsuario = "INSERT INTO usuarios (usuario, password, correo, activo) VALUES (?, ?, ?, 0)";
             
             try {
                 $stmtUsuario = mysqli_prepare($conexion, $sqlUsuario);
-                mysqli_stmt_bind_param($stmtUsuario, "sss", $this->username, $this->password, $this->correo);
+                mysqli_stmt_bind_param($stmtUsuario, "sss", $username, $this->password, $this->correo);
                 $resultUsuario = mysqli_stmt_execute($stmtUsuario);
         
                 if ($resultUsuario) {
@@ -172,7 +170,7 @@
         public function validate(){
             $sql = "SELECT 1 
             FROM usuarios u
-            WHERE u.usuario = ? AND u.password = ? AND activo = 1";
+            WHERE u.correo = ? AND u.password = ? AND activo = 1";
             try {
                 $conexion = OpenDataBase();
                 $stmt = mysqli_prepare($conexion, $sql);
@@ -180,7 +178,7 @@
                     die("Error en la preparación de la consulta: " . mysqli_error($conexion));
                 }
                 
-                mysqli_stmt_bind_param($stmt, "ss", $this->username, $this->password);
+                mysqli_stmt_bind_param($stmt, "ss", $this->correo, $this->password);
                 mysqli_stmt_execute($stmt);
                 mysqli_stmt_store_result($stmt);
                 if (mysqli_stmt_num_rows($stmt) > 0)
@@ -221,5 +219,17 @@
             $length = 32;
             return bin2hex(random_bytes(($length - ($length % 2)) / 2));
         } 
+
+        public function Obtener() {
+            $database = OpenDataBase();
+            $stmt = $database->prepare("SELECT * FROM Usuarios  WHERE correo = ? AND activo = 1");
+            $stmt->bind_param("s", $this->correo);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+            $usuario = $result->fetch_assoc();
+            closeDataBase($database);
+            return $usuario;
+        }
     }
 ?>
