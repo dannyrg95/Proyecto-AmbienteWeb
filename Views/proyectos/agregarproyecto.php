@@ -21,35 +21,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="es">
-
 <?php
-include_once('../../global.php');
-include_once(VIEWS_PATH . '/layout.php');
-MostrarHead('Agregar Proyecto');
+    include_once('../../global.php');
+    include_once(VIEWS_PATH . '/layout.php');
+    MostrarHead('Agregar Proyecto');
 ?>
 
 <body class="grid-container">
     <?php
     MostrarHeader();
     ?>
-
-    <main class="main">
+    <form   class="proyectos-agregar-form" method="post" action="">
+        <a href="<?php echo ROOT . "/Views/proyectos/"?>" class="atras">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Atrás
+        </a>
         <h1>Agregar Proyecto</h1>
-        
-        <form   class="proyectos-agregar-form" method="post" action="">
-            <label for="nombre">Nombre del Proyecto:</label>
-            <input type="text" id="nombre" name="nombre" required>
+        <label for="nombre">Nombre del Proyecto:</label>
+        <input type="text" id="nombre" name="nombre" required>
 
-            <label for="fecha_inicio">Fecha de Inicio:</label>
-            <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+        <label for="fecha_inicio">Fecha de Inicio:</label>
+        <input type="date" id="fecha_inicio" name="fecha_inicio" required>
 
-            <label for="fecha_fin">Fecha de Fin:</label>
-            <input type="date" id="fecha_fin" name="fecha_fin" required>
+        <label for="fecha_fin">Fecha de Fin:</label>
+        <input type="date" id="fecha_fin" name="fecha_fin" required>
 
-            <button type="submit">Agregar Proyecto</button>
-        </form>
-
-    </main>
+        <button type="submit">Agregar Proyecto</button>
+    </form>
 
     <?php
     MostrarFooter();

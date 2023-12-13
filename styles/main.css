@@ -75,7 +75,8 @@ ul li {
 }
 
 .sign-in-up {
-    width: 18%;
+    min-width: 200px;
+    max-width: 210px;
 }
 
 .header-navbar-list li:first-child {
@@ -252,7 +253,7 @@ select {
 
 /* Empleados */
 
-.form-empleados, .form-rol, .form-usuarios, .proyectos-agregar-form {
+.form-empleados, .form-rol, .form-usuarios, .proyectos-agregar-form, .tareas-form {
     display: flex;
     margin: 0 auto;
     margin-bottom: 35.7rem;
@@ -269,7 +270,7 @@ select {
 }
 
 
-.form-empleados > input, .form-rol > input, .form-usuarios > input,.proyectos-agregar-form > input {
+.form-empleados > input, .form-rol > input, .form-usuarios > input,.proyectos-agregar-form > input, .tareas-form > input {
     border: none;
     background: #eee;
     border-radius: 20px;
@@ -278,13 +279,14 @@ select {
     outline: none;
 }
 
-.form-empleados h2, .form-rol h2, .form-usuarios h2, .form-register, .modificar-proyecto-titulo {
+.form-empleados h2, .form-rol h2, .form-usuarios h2, .form-register, .modificar-proyecto-titulo, .tareas-titulo, .empleados-titulo, .usuarios-titulo {
     margin-bottom: 2rem;
     font-size: 2rem;
     font-weight: bold;
+    text-align: center;
 }
 
-.form-empleados button, .boton-usuarios, .role-btn, .inner-container-agregar-empleado-proyecto button,  .proyectos-agregar-form button {
+.form-empleados button, .boton-usuarios, .role-btn, .inner-container-agregar-empleado-proyecto button,  .proyectos-agregar-form button, .tareas-form button, .inner-container-agregar-tarea-empleado-proyecto button {
     border: none;
     outline: none;
     background: var(--blue);
@@ -300,7 +302,7 @@ select {
     width: fit-content;
 }
 
-.form-empleados button:hover, .boton-usuarios:hover {
+.form-empleados button:hover, .boton-usuarios:hover, .tareas-form button:hover, .role-btn:hover, .inner-container-agregar-empleado-proyecto button:hover, .proyectos-agregar-form button:hover, .inner-container-agregar-tarea-empleado-proyecto button:hover {
     transform: translateY(-10%) scale(1.01);
 }
 
@@ -310,14 +312,14 @@ select {
     justify-content: center;
     margin: 0 auto;    
     margin-bottom: 47.3rem;
-    width: 80%;
+    width: 90%;
     flex-wrap: wrap;
     min-height: 20.6vh;
     gap: 2rem;
 }
 
 .empleado, .usuario, .empleados-proyecto > div, .tarea {
-    min-width: 280px;
+    min-width: 350px;
     padding: 2em 3em;
     width: 30%;
     min-height: 190px;
@@ -349,7 +351,7 @@ select {
     transition: opacity .4s ease-in-out;
 }
 
-.opciones .delete-empleado, .edit-empleado, .edit-usuario, .delete-usuario, .delete-empleado-proyecto { 
+.opciones .delete-empleado, .edit-empleado, .edit-usuario, .delete-usuario, .delete-empleado-proyecto, .agregar-tarea-empleado-proyecto { 
     border: 3px solid var(--danger);
     border-radius: 30px;
     padding: .4em .6em;
@@ -369,12 +371,21 @@ select {
     font-size: 1.5rem;
 }
 
+.agregar-tarea-empleado-proyecto {
+    border: 3px solid var(--success);
+}
+
+.agregar-tarea-empleado-proyecto {
+    color: var(--success);
+    font-size: 1.2rem;
+}
+
 .empleado:hover .opciones, .usuario:hover .opciones, .empleados-proyecto > div:hover .opciones, .tarea:hover .opciones {
     opacity: 1;
 }
 
 .opciones-empleado, .opciones-tarea {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     padding: 2rem;
     margin-top: 4rem;
@@ -473,7 +484,7 @@ th {
 }
 
 
-.pop-up-agregar-empleados-proyecto {
+.pop-up-agregar-empleados-proyecto, .pop-up-agregar-tarea-empleados-proyecto {
     position: fixed;
     inset: 0 0 0 0;
     width: 100%;
@@ -487,11 +498,10 @@ th {
     transition: opacity .3s, transform .4s ease-in-out;
 }
 
-.inner-container-agregar-empleado-proyecto {
+.inner-container-agregar-empleado-proyecto, .inner-container-agregar-tarea-empleado-proyecto {
     width: 90%;
     padding: 2em 4em; 
     min-height: 50%;
-    max-height: 50vh;
     gap: 1rem;
     box-shadow: 0 0 10px #00000025,
     0 0 0 2100px #0001;
@@ -504,19 +514,18 @@ th {
     flex-direction: column;
 }
 
-.inner-container-agregar-empleado-proyecto a {
+.inner-container-agregar-empleado-proyecto a, .inner-container-agregar-tarea-empleado-proyecto a {
     align-self: flex-start;
     font-size: 2.5rem;
     cursor: pointer;
 }
 
-.inner-container-agregar-empleado-proyecto button {
+.inner-container-agregar-empleado-proyecto button, .inner-container-agregar-tarea-empleado-proyecto button {
     background: #28a745;
 }
 
-.agregar-empleado-proyecto {
+.agregar-empleado-proyecto, .tarea-empleado-proyecto {
     width: 90%;
-    padding: 2em 4em; 
     min-height: 50%;
     gap: 1rem;
     display: flex;
@@ -526,7 +535,7 @@ th {
 }
 
 
-.agregar-empleado-proyecto li {
+.agregar-empleado-proyecto li, .tarea-empleado-proyecto li {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -535,10 +544,18 @@ th {
 }
 
 .agregar-empleado-proyecto li p {
-    max-width: 50%;
     margin-right: auto;
+    max-width: 50%;
     margin-left: .5rem;
 }
+
+.tarea-empleado-proyecto li p:nth-child(3)  {
+    max-width: 50%;
+    margin-left: .5rem;
+    margin-left: auto;
+    margin-right: 20%;
+}
+
 
 .agregar-empleado-proyecto li input {
     width: 20px;
@@ -546,12 +563,12 @@ th {
     border-radius: 50%;
 }
 
-.agregar-empleado-proyecto li h3, .agregar-empleado-proyecto li p {
+.agregar-empleado-proyecto li h3, .agregar-empleado-proyecto li p, .tarea-empleado-proyecto li p, .tarea-empleado-proyecto li h3 {
     font-size: 1.5rem;
     font-weight: normal;
 }
 
-.agregar-empleado-proyecto li:first-child p, .agregar-empleado-proyecto li:first-child h3 {
+.agregar-empleado-proyecto li:first-child p, .agregar-empleado-proyecto li:first-child h3, .tarea-empleado-proyecto li:first-child p, .tarea-empleado-proyecto li:first-child h3 {
     font-weight: bold;    
 }
 
@@ -597,11 +614,24 @@ th {
     opacity: 1;
 }
 
+.radio-tarea {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    
+}
+
 .pop-up-agregar-empleados-proyecto.close {
     transform: translateY(7%);
     opacity: 0;
     z-index: -100;
+    
+}
 
+.pop-up-agregar-tarea-empleados-proyecto.close {
+    transform: translateY(7%);
+    opacity: 0;
+    z-index: -100;
 }
 
 .proyecto-empleado-info {
@@ -642,7 +672,7 @@ th {
 
 
 /* Vista adaptada para teléfonos */
-@media (max-width: 815px) {
+@media (max-width: 900px) {
     .hamburger-menu.close + .header {
         transform: translateX(-100%);
         transition: transform .7s ease-in-out;
@@ -671,7 +701,7 @@ th {
     
     .header-container::after {
         content: "";
-        width: 200%;
+        width: 400%;
         position: absolute;
         right: -200%;
         top: 0;
@@ -737,7 +767,7 @@ th {
         width: 80%;
     }
 
-    .proyectos-titulo, .proyectos-empleado-titulo, .empleados-proyecto-empty {
+    .proyectos-titulo, .proyectos-empleado-titulo, .empleados-proyecto-empty, .tareas-titulo, .usuarios-titulo, .empleados-titulo {
        margin-top: 5rem;
     }   
 
@@ -769,8 +799,8 @@ th {
 }
 
 
-@media (max-width: 900px) {
+/* @media (max-width: 900px) {
    .opciones-proyecto {
         flex-direction: column;
     }
-}
+} */

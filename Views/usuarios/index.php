@@ -8,6 +8,8 @@
     <?php MostrarHead("Usuarios")?>
     <body>
         <?php MostrarHeader()?>
+        <h1 class="usuarios-titulo">Usuarios</h1>
+
         <div class="usuarios-container">
             <?php  ObtenerTodos()?>
         </div>
