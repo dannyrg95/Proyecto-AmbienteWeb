@@ -13,6 +13,28 @@
     --font-family: "Montserrat", "Roboto", sans-serif;
 }
 
+
+.info-integrantes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 90%;
+    flex-direction: column;
+    gap: 5rem;
+    margin-bottom: 50rem;
+}
+
+.info-integrantes ul li {
+    font-size: 2rem;
+}
+
+.info-integrantes ul {
+    list-style: none;
+}
+
+
+
 * {
     padding: 0;
     margin: 0;
@@ -390,7 +412,7 @@ select {
     padding: 2rem;
     margin-top: 4rem;
 }
-.opciones-empleado a, .new-empleado, .modificar-proyecto, .eliminar-proyecto, .new-tarea, .opciones-proyecto-agregar a {
+.opciones-empleado a, .new-empleado, .modificar-proyecto, .eliminar-proyecto, .new-tarea, .opciones-proyecto-agregar a, .reporte-proyecto {
     background-color: #fff;
     padding: 1em 2.5em;
     color: var(--success);
@@ -403,11 +425,11 @@ select {
     text-align: center;
 }
 
-.opciones-empleado a:hover, .new-empleado:hover, .modificar-proyecto:hover, .eliminar-proyecto:hover, .new-tarea:hover, .opciones-proyecto-agregar a:hover {
+.opciones-empleado a:hover, .new-empleado:hover, .modificar-proyecto:hover, .eliminar-proyecto:hover, .new-tarea:hover, .opciones-proyecto-agregar a:hover, .reporte-proyecto:hover {
     box-shadow: inset 0 0 15px 2px #0002, 0 0 0 #0000;
 }
 
-.opciones-empleado a:active, .new-empleado:active, .modificar-proyecto:active, .eliminar-proyecto:active, .new-tarea:active, .opciones-proyecto-agregar a:active {
+.opciones-empleado a:active, .new-empleado:active, .modificar-proyecto:active, .eliminar-proyecto:active, .new-tarea:active, .opciones-proyecto-agregar a:active, .reporte-proyecto:active {
     box-shadow: inset 0 0 15px 7px #0002, 0 0 0 #0000;
 }
 
@@ -484,7 +506,7 @@ th {
 }
 
 
-.pop-up-agregar-empleados-proyecto, .pop-up-agregar-tarea-empleados-proyecto {
+.pop-up-agregar-empleados-proyecto, .pop-up-agregar-tarea-empleados-proyecto, .pop-up-reporte {
     position: fixed;
     inset: 0 0 0 0;
     width: 100%;
@@ -498,7 +520,7 @@ th {
     transition: opacity .3s, transform .4s ease-in-out;
 }
 
-.inner-container-agregar-empleado-proyecto, .inner-container-agregar-tarea-empleado-proyecto {
+.inner-container-agregar-empleado-proyecto, .inner-container-agregar-tarea-empleado-proyecto, .inner-reporte {
     width: 90%;
     padding: 2em 4em; 
     min-height: 50%;
@@ -514,7 +536,7 @@ th {
     flex-direction: column;
 }
 
-.inner-container-agregar-empleado-proyecto a, .inner-container-agregar-tarea-empleado-proyecto a {
+.inner-container-agregar-empleado-proyecto a, .inner-container-agregar-tarea-empleado-proyecto a, .inner-reporte a {
     align-self: flex-start;
     font-size: 2.5rem;
     cursor: pointer;
@@ -524,7 +546,19 @@ th {
     background: #28a745;
 }
 
-.agregar-empleado-proyecto, .tarea-empleado-proyecto {
+.inner-reporte {
+    justify-content: flex-start;
+}
+
+.reporte-lista {
+    list-style: none;
+}
+
+.reporte-lista li {
+    font-size: 2rem;
+}
+
+.agregar-empleado-proyecto, .tarea-empleado-proyecto, .reporte-lista {
     width: 90%;
     min-height: 50%;
     gap: 1rem;
@@ -634,6 +668,12 @@ th {
     z-index: -100;
 }
 
+.pop-up-reporte.close {
+    transform: translateY(7%);
+    opacity: 0;
+    z-index: -100;
+}
+
 .proyecto-empleado-info {
     display: flex;
     align-items: center;
@@ -656,7 +696,7 @@ th {
     width: 100%;
 }
 
-.modificar-proyecto {
+.modificar-proyecto, .reporte-proyecto {
     color: var(--blue)
 }
 

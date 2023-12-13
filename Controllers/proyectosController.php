@@ -92,7 +92,7 @@ class ProyectoController {
         <div class="opciones-proyecto">
             <a class="new-empleado">Agregar</a>
             <a href="' . ROOT . "/Views/proyectos/modificarproyecto.php?id_proyecto=" . $id . '" class="modificar-proyecto">Modificar Proyecto</a>
-            <a onclick="reportesProyecto(' . $id . ')" class="modificar-proyecto">Reportes</a>
+            <a class="reporte-proyecto">Reportes</a>
             <a onclick="deleteProyecto()" class="eliminar-proyecto">Eliminar Proyecto</a>
         </div>
         </div>
@@ -170,6 +170,31 @@ class ProyectoController {
         $template .= '
         </ul>
         <button  onclick="addEmpleadoEmpty()"><i class="fa-solid fa-plus"></i> Agregar</button>
+        </div>';
+        return $template;
+    }
+
+    public static function agregarReporte() {
+        $horas = ProyectoModel::horasProyecto($_GET["id"]);
+        $proyecto = ProyectoModel::Obtener($_GET["id"]);
+        $totalHoras = 0;
+        $fechaInicio = new DateTime($proyecto["fecha_inicio"]);
+        $fechaFin = new DateTime($proyecto["fecha_fin"]);
+        $diferencia = $fechaInicio->diff($fechaFin);
+        
+        foreach($horas as $hora) {
+            if(isset($hora["horas"]) && is_numeric($hora["horas"])) {
+                $totalHoras += $hora["horas"];
+            }
+        }
+
+        $template = '
+        <div class="inner-reporte">
+            <a class="close-pop-up-reportes" href="#"><i class="fa-solid fa-xmark"></i></a>
+            <ul class="reporte-lista">
+                <li>Horas trabajadas del proyecto: ' . $totalHoras . '</li>
+                <li>Tiempo: ' . ($diferencia->format('%y años, %m meses, %d días')) . '</li>
+            </ul>
         </div>';
         return $template;
     }

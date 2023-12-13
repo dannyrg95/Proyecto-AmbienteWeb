@@ -119,20 +119,20 @@
 
     }
    
-    if (isset($_POST["proyecto"])) {
-        $idProyecto = $_POST["idProyecto"];
+    // if (isset($_POST["proyecto"])) {
+    //     $idProyecto = $_POST["idProyecto"];
         
     
-        if (!isset($idProyecto)) {
-            $response = '{"success": false, "errorMessage": "Proyecto no encontrado"}';
-        }
+    //     if (!isset($idProyecto)) {
+    //         $response = '{"success": false, "errorMessage": "Proyecto no encontrado"}';
+    //     }
 
-       ProyectoModel::horasProyecto($idProyecto);
+    //    $horas = ProyectoModel::horasProyecto($idProyecto);
         
         
-        $response = '{"success": true}';
+    //     $response = '{"success": true, "horas":' . $horas . '}';
 
-    }
+    // }
 
     ob_end_clean();
     echo $response;

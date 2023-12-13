@@ -13,6 +13,10 @@ include_once(VIEWS_PATH . "/layout.php");
             <?php echo ProyectoController::agregarEmpleadosProyectoPopUp()?>
         </div>
 
+        <div class="pop-up-reporte close">
+            <?php echo ProyectoController::agregarReporte()?>
+        </div>
+
         <div class="pop-up-agregar-tarea-empleados-proyecto close">
             <?php echo ProyectoController::agregarTareaEmpleadoPopUp()?>
         </div>
@@ -39,6 +43,20 @@ include_once(VIEWS_PATH . "/layout.php");
 
         const modalTareas = document.querySelector(".pop-up-agregar-tarea-empleados-proyecto");
         const closeTareas = document.querySelector(".close-pop-up-tareas");
+
+
+        const closeReporte = document.querySelector(".close-pop-up-reportes");
+        const openReporte = document.querySelector(".reporte-proyecto");
+        const modalReporte = document.querySelector(".pop-up-reporte")
+
+        openReporte.addEventListener("click", () => {
+            modalReporte.classList.toggle("close");
+        })
+
+        closeReporte.addEventListener("click", () => {
+            modalReporte.classList.toggle("close");
+        })
+
 
         closeEmpleados.addEventListener("click", () => {            
             modalEmpleados.classList.toggle("close");
@@ -129,20 +147,22 @@ include_once(VIEWS_PATH . "/layout.php");
             });
         }
 
-        function reportesProyecto(id) {
-            $.ajax({
-                url: "<?php echo ROOT?>/api/rest/apiRest.php",
-                method: "POST",
-                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                data: "proyecto=1&idProyecto=" + encodeURIComponent(id)
-            }).done(function(response) {
-                const result = JSON.parse(response);
+        // function reportesProyecto(id) {
+        //     $.ajax({
+        //         url: "<?php echo ROOT?>/api/rest/apiRest.php",
+        //         method: "POST",
+        //         contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        //         data: "proyecto=1&idProyecto=" + encodeURIComponent(id)
+        //     }).done(function(response) {
+        //         const result = JSON.parse(response);
                 
-                if (result.success) {
-                    location.replace("http://localhost/<?php echo ROOT?>/Views/proyectos/");
-                } 
-            });
-        }
+        //         if (result.success) {
+        //             location.replace("http://localhost/<?php echo ROOT?>/Views/proyectos/");
+        //         } 
+
+
+        //     });
+        // }
 
 
 

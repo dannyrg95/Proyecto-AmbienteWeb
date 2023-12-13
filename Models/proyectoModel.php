@@ -151,10 +151,13 @@ class ProyectoModel {
         return $tareas;
     }
     
-    public static function horasProyecto() {
+    public static function horasProyecto($idProyecto) {
         $database = OpenDataBase();
-        $result = $database->query("SELECT tareas.horas FROM Proyectos_Empleados  INNER JOIN Tareas ON tareas.id_tarea = proyectos_empleados.id_tarea AND id_proyecto = ?");
-        $horas = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt = $database->prepare("SELECT tareas.horas FROM Proyectos_Empleados  INNER JOIN Tareas ON tareas.id_tarea = proyectos_empleados.id_tarea AND id_proyecto = ?");
+        $stmt->bind_param("i", $idProyecto);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $horas = $result->fetch_assoc();
         closeDataBase($database);
         return $horas;
 
